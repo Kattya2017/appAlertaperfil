@@ -63,7 +63,7 @@ const style = StyleSheet.create({
         alignItems: 'center',
         width: '85%',
         borderRadius: 10,
-        borderColor: '#004F79',
+        borderColor: '#840102',
         borderWidth: 1.5,
         backgroundColor: '#fff',
         height: 55,
@@ -82,7 +82,7 @@ const style = StyleSheet.create({
     },
 
     btnLogin:{
-        backgroundColor: '#004F79',
+        backgroundColor: '#840102',
         width: '85%',
         height: 55,
         justifyContent: 'center',
@@ -93,6 +93,7 @@ const style = StyleSheet.create({
 
     textBtn:{
         color: '#fff',
+        fontFamily: 'Montserrat-VariabkeFont_wght',
         fontWeight: 'bold'
     },
 
@@ -106,7 +107,7 @@ const style = StyleSheet.create({
     },
 
     textLink:{
-        color: '#004F79',
+        color: '#840102',
         fontWeight: 'bold'
     }
 

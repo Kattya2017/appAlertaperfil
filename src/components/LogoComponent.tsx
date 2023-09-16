@@ -59,15 +59,16 @@ const style = StyleSheet.create({
     },
 
     textTitulo:{
-        color: '#004F79',
-        fontSize: 25,
+        color: '#840102',
+        fontFamily:'Roboto-Bold',
+        fontSize: 30,
         marginTop: 20
     },
 
     textSubtitulo:{
         fontWeight: 'bold',
         color: '#89919C',
-        marginTop: 10,
+        marginTop: 5,
         fontSize: 16,
         marginBottom: 20
     },

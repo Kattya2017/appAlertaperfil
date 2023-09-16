@@ -7,6 +7,6 @@ const Stack = createStackNavigator();
 
 export const StackNavigator = () => {
     return(
-        <Stack.Screen name="HomeScreen" component={AlertasDerivadasScreen} />
+        <Stack.Screen name="LoginScreen" component={LoginScreen} />
     )
 }
