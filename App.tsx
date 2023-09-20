@@ -7,6 +7,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { StackNavigator } from './src/navigation/StackNavigator';
 import AlertasDerivadasScreen from './src/screens/AlertasDerivadasScreen';
 import HomeScreen from './src/screens/HomeScreen';
+import BandejaAlertasScreen from './src/screens/BandejaAlertasScreen';
+import DetalleAlertaScreen from './src/screens/ListaInformaticosScreen';
+import ListaInformaticosScrren from './src/screens/ListaInformaticosScreen';
+import ReporteAlertaScreen from './src/screens/ReporteAlertaScreen';
 
 
 const App = () => {
@@ -14,7 +18,10 @@ const App = () => {
     //<LoginScreen/>
     //<AlertasDerivadasScreen/>
     //<HomeScreen/>
-    <AlertasDerivadasScreen/>
+    //<AlertasDerivadasScreen/>
+    //<BandejaAlertasScreen/>
+    //<ListaInformaticosScrren/>
+    <ReporteAlertaScreen/>
   )
 
 
