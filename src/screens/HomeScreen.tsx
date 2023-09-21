@@ -2,20 +2,26 @@
 import React from 'react'
 import { View, StyleSheet, Image, Text, Dimensions, TouchableOpacity } from 'react-native';
 import FondoComponent from '../components/FondoComponent'
+import { StackScreenProps } from '@react-navigation/stack';
+
 
 const {width,height} = Dimensions.get('window');
-const HomeScreen = () => {
+interface Props extends StackScreenProps<any, any>{};
+
+const HomeScreen = ({navigation}: Props) => {
+
     return (
         <View style={styles.general}>
             <FondoComponent />
-            <Text style={{marginTop:80, left:10, fontWeight:'900', color:'#464646'}} >Viernes, 15 setiembre de 2023</Text>
+            <Text style={{marginTop:20, left:10, fontWeight:'900', color:'#464646'}} >Viernes, 15 setiembre de 2023</Text>
             <View style={styles.containerContent}>
-                <TouchableOpacity style={styles.container}>
+                <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('Derivadas')}>
                     <View style={styles.imageContainer}>
                         <Image style={styles.logoImagen} source={require('../assets/img/alerta/redes-problema.png')} />
                     </View>
                     <View style={styles.palabras}>
                         <Text style={styles.texto}>SERVICIO TECNICO DE IMPRESORA</Text>
+                        <Text style={styles.subTexto}>Sede de Administración</Text>
                         <Text style={styles.subTexto}>Fecha Ingreso:</Text>
                         <Text style={styles.subTexto}>Hora Ingreso:</Text>
                     </View>
@@ -27,6 +33,7 @@ const HomeScreen = () => {
                     </View>
                     <View style={styles.palabras}>
                         <Text style={styles.texto}>SERVICIO TECNICO DE IMPRESORA</Text>
+                        <Text style={styles.subTexto}>Sede de Administración</Text>
                         <Text style={styles.subTexto}>Fecha Ingreso:</Text>
                         <Text style={styles.subTexto}>Hora Ingreso:</Text>
                     </View>
@@ -38,6 +45,7 @@ const HomeScreen = () => {
                     </View>
                     <View style={styles.palabras}>
                         <Text style={styles.texto}>SERVICIO TECNICO DE IMPRESORA</Text>
+                        <Text style={styles.subTexto}>Sede de Administración</Text>
                         <Text style={styles.subTexto}>Fecha Ingreso:</Text>
                         <Text style={styles.subTexto}>Hora Ingreso:</Text>
                     </View>
@@ -49,6 +57,7 @@ const HomeScreen = () => {
                     </View>
                     <View style={styles.palabras}>
                         <Text style={styles.texto}>SERVICIO TECNICO DE IMPRESORA</Text>
+                        <Text style={styles.subTexto}>Sede de Administración</Text>
                         <Text style={styles.subTexto}>Fecha Ingreso:</Text>
                         <Text style={styles.subTexto}>Hora Ingreso:</Text>
                     </View>
@@ -81,19 +90,18 @@ const styles = StyleSheet.create({
         width: '20%',
         //justifyContent:'center',
         justifyContent:'center',
-        alignItems: 'center',
-        backgroundColor:'#fff'
+        alignItems: 'center'
     },
     palabras: {
         //backgroundColor: '#FFE2E2',
         width: '80%',
         borderBottomColor:'#840102',
-        borderBottomWidth:0.9,
-        backgroundColor:'#fff'
+        borderBottomWidth:0.9
     },
     logoImagen: {
-        width: 45,
-        height: 45
+        //backgroundColor:'red',
+        width: 50,
+        height: 50
     },
     texto:{
         fontWeight: 'bold',
@@ -101,7 +109,8 @@ const styles = StyleSheet.create({
     },
     subTexto:{
         fontWeight:'bold',
-        color:'#47525E'
+        color:'#47525E',
+        //top: 5
     }
     
 });

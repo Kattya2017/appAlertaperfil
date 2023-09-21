@@ -57,13 +57,14 @@ const style = StyleSheet.create({
       backgroundColor: '#fff',
       borderRadius: 10,
       borderColor: '#840102',
-      borderWidth:2
+      borderWidth:2,
+      top:80
     },
     
     textPrincipal:{
       fontFamily:'Roboto-Bold',
       fontSize: 15,
-      bottom:20,
+      bottom:10,
       color:'#840102',
       marginTop:30,
       textAlign: 'center'
@@ -86,7 +87,7 @@ const style = StyleSheet.create({
       justifyContent:'center',
       alignItems:'center',
       borderRadius:10,
-      marginTop:'55%'
+      marginTop:'35%'
     },
 
     BtnTexto:{

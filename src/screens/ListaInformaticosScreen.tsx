@@ -72,8 +72,7 @@ const styles = StyleSheet.create({
     scrollContainer:{
         flex: 1,
         width,
-        height,
-        marginTop: 20
+        height
     },
 
     cuadroContainer:{
