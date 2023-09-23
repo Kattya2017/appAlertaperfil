@@ -10,8 +10,8 @@ const ReporteAlertaScreen = () => {
             <FondoComponent />
 
             <ScrollView style={styles.ScrollView}>
-                <Text style={styles.textInformatico}>ROGER PANDURO LOPEZ</Text>
-                <View style={{ width: '100%', height: 140, justifyContent: 'center', alignItems: 'center', marginBottom: 10 }}>
+                <View style={{ width, height, alignItems: 'center' }}>
+                    <Text style={styles.textInformatico}>ROGER PANDURO LOPEZ</Text>
                     <View style={styles.cuadro}>
                         <View style={styles.imgTipoalerta}>
                             <Image source={require('../assets/img/alerta/sistemas-informaticos.png')}
@@ -28,82 +28,41 @@ const ReporteAlertaScreen = () => {
                             <Text style={styles.bottomEstadoPendiente}>PENDIENTE</Text>
                         </View>
                     </View>
-                </View>
 
-                <View style={{ width: '100%', height: 140, justifyContent: 'center', alignItems: 'center', marginBottom: 10 }}>
                     <View style={styles.cuadro}>
                         <View style={styles.imgTipoalerta}>
-                            <Image source={require('../assets/img/alerta/redes-problema.png')}
+                            <Image source={require('../assets/img/alerta/sistemas-informaticos.png')}
                                 style={{ width: '75%', height: '55%' }} />
                         </View>
                         <View>
-                            <Text style={styles.textAlerta}>SOPORTE TECNICO COMPUTADORA</Text>
+                            <Text style={styles.textAlerta}>SOPORTE TECNICO IMPRESORA</Text>
                             <Text style={styles.textDescripcion}>- Sede Central</Text>
                             <Text style={styles.textDescripcion}>- Sala Civil</Text>
-                            <Text style={styles.textDescripcion}>- Fecha: 20/09/2023</Text>
-                            <Text style={styles.textDescripcion}>- Hora: 10:00 am</Text>
+                            <Text style={styles.textDescripcion}>- Fecha: 21/09/2023</Text>
+                            <Text style={styles.textDescripcion}>- Hora: 8:00 am</Text>
                         </View>
-                        <View style={styles.bottom}>
-                            <Text style={styles.bottomEstado}>ATENDIDO</Text>
+                        <View style={styles.bottomPendiente}>
+                            <Text style={styles.bottomEstadoPendiente}>PENDIENTE</Text>
                         </View>
                     </View>
-                </View>
 
-                <View style={{ width: '100%', height: 140, justifyContent: 'center', alignItems: 'center', marginBottom: 10 }}>
                     <View style={styles.cuadro}>
                         <View style={styles.imgTipoalerta}>
-                            <Image source={require('../assets/img/alerta/redes-problema.png')}
+                            <Image source={require('../assets/img/alerta/sistemas-informaticos.png')}
                                 style={{ width: '75%', height: '55%' }} />
                         </View>
                         <View>
-                            <Text style={styles.textAlerta}>SOPORTE TECNICO DE REDES</Text>
+                            <Text style={styles.textAlerta}>SOPORTE TECNICO IMPRESORA</Text>
                             <Text style={styles.textDescripcion}>- Sede Central</Text>
                             <Text style={styles.textDescripcion}>- Sala Civil</Text>
-                            <Text style={styles.textDescripcion}>- Fecha: 20/09/2023</Text>
-                            <Text style={styles.textDescripcion}>- Hora: 10:00 am</Text>
+                            <Text style={styles.textDescripcion}>- Fecha: 21/09/2023</Text>
+                            <Text style={styles.textDescripcion}>- Hora: 8:00 am</Text>
                         </View>
-                        <View style={styles.bottom}>
+                        <View style={styles.bottomPendiente}>
                             <Text style={styles.bottomEstado}>ATENDIDO</Text>
                         </View>
                     </View>
-                </View>
 
-                <View style={{ width: '100%', height: 140, justifyContent: 'center', alignItems: 'center', marginBottom: 10 }}>
-                    <View style={styles.cuadro}>
-                        <View style={styles.imgTipoalerta}>
-                            <Image source={require('../assets/img/alerta/redes-problema.png')}
-                                style={{ width: '75%', height: '55%' }} />
-                        </View>
-                        <View>
-                            <Text style={styles.textAlerta}>SOPORTE TECNICO DE INTERNET</Text>
-                            <Text style={styles.textDescripcion}>- Sede Central</Text>
-                            <Text style={styles.textDescripcion}>- Sala Civil</Text>
-                            <Text style={styles.textDescripcion}>- Fecha: 20/09/2023</Text>
-                            <Text style={styles.textDescripcion}>- Hora: 10:00 am</Text>
-                        </View>
-                        <View style={styles.bottom}>
-                            <Text style={styles.bottomEstado}>ATENDIDO</Text>
-                        </View>
-                    </View>
-                </View>
-
-                <View style={{ width: '100%', height: 140, justifyContent: 'center', alignItems: 'center', marginBottom: 10 }}>
-                    <View style={styles.cuadro}>
-                        <View style={styles.imgTipoalerta}>
-                            <Image source={require('../assets/img/alerta/redes-problema.png')}
-                                style={{ width: '75%', height: '55%' }} />
-                        </View>
-                        <View>
-                            <Text style={styles.textAlerta}>SISTEMAS INFORMATICOS</Text>
-                            <Text style={styles.textDescripcion}>- Sede Central</Text>
-                            <Text style={styles.textDescripcion}>- Sala Civil</Text>
-                            <Text style={styles.textDescripcion}>- Fecha: 20/09/2023</Text>
-                            <Text style={styles.textDescripcion}>- Hora: 10:00 am</Text>
-                        </View>
-                        <View style={styles.bottom}>
-                            <Text style={styles.bottomEstado}>ATENDIDO</Text>
-                        </View>
-                    </View>
                 </View>
             </ScrollView>
         </View>
@@ -114,29 +73,29 @@ export default ReporteAlertaScreen;
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
+        flex: 1
     },
 
     ScrollView: {
         flex: 1,
         width,
-        height,
-        marginTop: 20
+        height
     },
 
     textInformatico: {
-        marginBottom: 20,
+        marginBottom: 10,
         fontWeight: '900',
         color: 'black',
         textAlign: 'center',
-        fontSize: 25
+        fontSize: 25,
+        top: 15
     },
 
     cuadro: {
         width: '90%',
-        height: '100%',
+        height: 150,
+        top: 20,
+        marginBottom: 10,
         backgroundColor: '#fff',
         borderRadius: 10,
         borderColor: '#840102',

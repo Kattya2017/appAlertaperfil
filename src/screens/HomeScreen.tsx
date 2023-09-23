@@ -15,7 +15,7 @@ const HomeScreen = ({navigation}: Props) => {
             <FondoComponent />
             <Text style={{marginTop:20, left:10, fontWeight:'900', color:'#464646'}} >Viernes, 15 setiembre de 2023</Text>
             <View style={styles.containerContent}>
-                <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('Derivadas')}>
+                <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('Lista')}>
                     <View style={styles.imageContainer}>
                         <Image style={styles.logoImagen} source={require('../assets/img/alerta/redes-problema.png')} />
                     </View>
