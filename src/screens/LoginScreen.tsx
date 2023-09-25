@@ -4,6 +4,7 @@ import FondoComponent from '../components/FondoComponent';
 import LogoComponent from '../components/LogoComponent';
 import AuthContext from '../context/AuthContext';
 import { useForm } from '../hooks/useForm';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const {width, height} = Dimensions.get('window');
 
@@ -28,13 +29,19 @@ const LoginScreen = () => {
         <View style={style.containerGeneral}>
             <View style={style.containerInput}>
                 <TextInput
-                    placeholder='Ingrese DNI'
+                    placeholder='Ingrese usuario'
                     style={style.textInput}
                     placeholderTextColor={'#969FAA'}
                     keyboardType='default'
                     autoCapitalize='none'
                     onChangeText={(value)=>onChange(value,'usuario')}
                     value={usuario}
+                    />
+                    <Icon
+                    name='person-sharp'
+                    color={'#840102'}
+                    size={35}
+                    style={style.iconText}
                     />
             </View>
             <View style={style.containerInput}>
@@ -47,6 +54,12 @@ const LoginScreen = () => {
                     value={password}
                     secureTextEntry={true}
                     autoCapitalize='none'
+                    />
+                    <Icon
+                    name='lock-closed-sharp'
+                    color={'#840102'}
+                    size={35}
+                    style={style.iconText}
                     />
             </View>
             <TouchableOpacity style={style.btnLogin}
@@ -125,6 +138,6 @@ const style = StyleSheet.create({
     textLink:{
         color: '#840102',
         fontWeight: 'bold'
-    }
+    },
 
 });

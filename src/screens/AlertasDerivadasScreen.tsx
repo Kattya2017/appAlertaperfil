@@ -2,10 +2,13 @@ import React from 'react'
 import { View, StyleSheet, Image, Dimensions, Text, TouchableOpacity } from 'react-native';
 import FondoComponent from '../components/FondoComponent';
 import Dropdown from 'react-native-input-select';
+import { DrawerScreenProps } from '@react-navigation/drawer';
 
 const {width, height} = Dimensions.get('window');
+interface Props extends DrawerScreenProps<any, any>{};
 
-const AlertasDerivadasScreen = () => {
+
+const AlertasDerivadasScreen = ({navigation}:Props) => {
   return (
     <View style={style.container}>
       <FondoComponent/>
@@ -13,12 +16,12 @@ const AlertasDerivadasScreen = () => {
         <Text style={style.textPrincipal}>SOPORTE TECNICO IMPRESORA</Text>
         <View style={{width:'85%', marginTop:70}}>
          
-          <Text style={style.textDescripcion}>Sede: Sede Administrativa</Text>
-          <Text style={style.textDescripcion}>Organo: Gerencia de Administración Distrital</Text>
-          <Text style={style.textDescripcion}>Unidad Organica: Unidad de Administración y Finanzas</Text>
-          <Text style={style.textDescripcion}>Area: Coordinación de Contabilidad</Text>
-          <Text style={style.textDescripcion}>Fecha:</Text>
-          <Text style={style.textDescripcion}>Hora:</Text>
+          <Text style={style.textDescripcion}>SEDE: Sede Administrativa</Text>
+          <Text style={style.textDescripcion}>ORGANO: Gerencia de Administración Distrital</Text>
+          <Text style={style.textDescripcion}>UNIDAD: Unidad de Administración y Finanzas</Text>
+          <Text style={style.textDescripcion}>AREA: Coordinación de Contabilidad</Text>
+          <Text style={style.textDescripcion}>Fecha   :</Text>
+          <Text style={style.textDescripcion}>Hora     :</Text>
         
         </View>
        
@@ -73,12 +76,23 @@ const style = StyleSheet.create({
     textDescripcion:{
       fontFamily: 'Roboto-Bold',
       color: 'black',
-      fontSize: 12,
+      fontSize: 13,
       justifyContent:'center',
       alignItems:'center',
       bottom:60,
       left:15
     },
+
+    textDetalle:{
+      fontFamily: 'Roboto-Bold',
+      color: 'black',
+      fontSize: 15,
+      justifyContent:'center',
+      alignItems:'center',
+      bottom:60,
+      left:15
+    },
+
 
     btnDerivar:{
       backgroundColor:'#840102',

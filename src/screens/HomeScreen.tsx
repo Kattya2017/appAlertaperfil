@@ -23,9 +23,6 @@ const HomeScreen = ({navigation}: Props) => {
         console.log(fecha);
         const newFecha= new Date();
         console.log(newFecha.toDateString());
-        
-        
-        
     }
     
 
@@ -41,7 +38,6 @@ const HomeScreen = ({navigation}: Props) => {
                     <View style={styles.palabras}>
                         <Text style={styles.texto}>SERVICIO TECNICO DE IMPRESORA</Text>
                         <Text style={styles.subTexto}>Sede de Administración</Text>
-                        <Text style={styles.subTexto}>Fecha Ingreso:</Text>
                         <Text style={styles.subTexto}>Hora Ingreso:</Text>
                     </View>
                 </TouchableOpacity>
@@ -53,7 +49,6 @@ const HomeScreen = ({navigation}: Props) => {
                     <View style={styles.palabras}>
                         <Text style={styles.texto}>SERVICIO TECNICO DE IMPRESORA</Text>
                         <Text style={styles.subTexto}>Sede de Administración</Text>
-                        <Text style={styles.subTexto}>Fecha Ingreso:</Text>
                         <Text style={styles.subTexto}>Hora Ingreso:</Text>
                     </View>
                 </TouchableOpacity>
@@ -65,7 +60,6 @@ const HomeScreen = ({navigation}: Props) => {
                     <View style={styles.palabras}>
                         <Text style={styles.texto}>SERVICIO TECNICO DE IMPRESORA</Text>
                         <Text style={styles.subTexto}>Sede de Administración</Text>
-                        <Text style={styles.subTexto}>Fecha Ingreso:</Text>
                         <Text style={styles.subTexto}>Hora Ingreso:</Text>
                     </View>
                 </TouchableOpacity>
@@ -77,7 +71,6 @@ const HomeScreen = ({navigation}: Props) => {
                     <View style={styles.palabras}>
                         <Text style={styles.texto}>SERVICIO TECNICO DE IMPRESORA</Text>
                         <Text style={styles.subTexto}>Sede de Administración</Text>
-                        <Text style={styles.subTexto}>Fecha Ingreso:</Text>
                         <Text style={styles.subTexto}>Hora Ingreso:</Text>
                     </View>
                 </TouchableOpacity>
@@ -93,32 +86,27 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     containerContent:{
-        width,//ahora
+        width,
         height,
         alignItems:'center',
         marginTop:20,
     },
     container: {
         flexDirection:'row',
-        //alignItems:'center',
         width:'95%',
-        marginBottom:15
+        marginBottom:25
     },
     imageContainer: {
-        //backgroundColor: '#FFE2E2',
         width: '20%',
-        //justifyContent:'center',
         justifyContent:'center',
         alignItems: 'center'
     },
     palabras: {
-        //backgroundColor: '#FFE2E2',
         width: '80%',
         borderBottomColor:'#840102',
         borderBottomWidth:0.9
     },
     logoImagen: {
-        //backgroundColor:'red',
         width: 50,
         height: 50
     },
