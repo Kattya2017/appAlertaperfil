@@ -1,12 +1,24 @@
-import React from 'react'
-import { Dimensions, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import React,{useContext} from 'react'
+import { Dimensions, StyleSheet, Text, TextInput, TouchableOpacity, View,Keyboard } from 'react-native';
 import FondoComponent from '../components/FondoComponent';
 import LogoComponent from '../components/LogoComponent';
+import AuthContext from '../context/AuthContext';
+import { useForm } from '../hooks/useForm';
 
 const {width, height} = Dimensions.get('window');
 
 
 const LoginScreen = () => {
+    const {usuario,password,form,onChange} = useForm({
+        usuario:'',
+        password:''
+    })
+    const {singIn} = useContext(AuthContext);
+    const login = ()=>{
+        console.log(usuario, password);
+        Keyboard.dismiss();
+        singIn({usuario, password});
+    };
   return (
     <View style={style.container}>
         <FondoComponent/>
@@ -19,24 +31,28 @@ const LoginScreen = () => {
                     placeholder='Ingrese DNI'
                     style={style.textInput}
                     placeholderTextColor={'#969FAA'}
-                    maxLength={8}
-                    keyboardType='numeric'/>
+                    keyboardType='default'
+                    autoCapitalize='none'
+                    onChangeText={(value)=>onChange(value,'usuario')}
+                    value={usuario}
+                    />
             </View>
             <View style={style.containerInput}>
                 <TextInput
                     placeholder='Ingrese contraseña'
                     style={style.textInput}
                     placeholderTextColor={'#969FAA'}
-                    maxLength={8}
-                    keyboardType='numeric'/>
+                    keyboardType='default'
+                    onChangeText={(value)=>onChange(value,'password')}
+                    value={password}
+                    secureTextEntry={true}
+                    autoCapitalize='none'
+                    />
             </View>
-            <TouchableOpacity style={style.btnLogin}>
+            <TouchableOpacity style={style.btnLogin}
+                onPress={login}
+            >
                 <Text style={style.textBtn}>INICIAR SESION</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={style.LinkdniBtn}>
-                <Text style={style.textBtn}>INICIAR SESION</Text>
-                <Text style={style.textCuenta}>No tienes una cuenta? </Text>
-                <Text style={style.textLink}>Registrate ahora</Text>
             </TouchableOpacity>
         </View>
     </View>

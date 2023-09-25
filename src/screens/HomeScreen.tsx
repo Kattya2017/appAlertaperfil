@@ -1,21 +1,40 @@
 
-import React from 'react'
+import React,{useEffect,useState} from 'react'
 import { View, StyleSheet, Image, Text, Dimensions, TouchableOpacity } from 'react-native';
 import FondoComponent from '../components/FondoComponent'
-import { StackScreenProps } from '@react-navigation/stack';
+import { DrawerScreenProps } from '@react-navigation/drawer';
 
 
 const {width,height} = Dimensions.get('window');
-interface Props extends StackScreenProps<any, any>{};
+interface Props extends DrawerScreenProps<any, any>{};
 
 const HomeScreen = ({navigation}: Props) => {
+
+    const [first, setfirst] = useState('');
+
+    useEffect(() => {
+        cargarFecha()
+    }, [])
+    
+    const cargarFecha=()=>{
+        const date = new Date();
+        console.log(date.toDateString());
+        const fecha = date.toLocaleDateString("es-PE",{timeZone:"America/Lima"});
+        console.log(fecha);
+        const newFecha= new Date();
+        console.log(newFecha.toDateString());
+        
+        
+        
+    }
+    
 
     return (
         <View style={styles.general}>
             <FondoComponent />
             <Text style={{marginTop:20, left:10, fontWeight:'900', color:'#464646'}} >Viernes, 15 setiembre de 2023</Text>
             <View style={styles.containerContent}>
-                <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('Lista')}>
+                <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('Alerta')}>
                     <View style={styles.imageContainer}>
                         <Image style={styles.logoImagen} source={require('../assets/img/alerta/redes-problema.png')} />
                     </View>

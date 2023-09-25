@@ -1,17 +1,25 @@
-import 'react-native-gesture-handler';
-
-import React from 'react'
-import { Text, View } from 'react-native';
-import LoginScreen from './src/screens/LoginScreen';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { StackNavigator } from './src/navigation/StackNavigator';
-import HomeScreen from './src/screens/HomeScreen';
+import 'react-native-gesture-handler';
+import { AuthProvider } from './src/context/AuthContext';
+
+
+const AppState = ({ children }: any) => {
+  return (
+    <AuthProvider>
+      {children}
+    </AuthProvider>
+  )
+}
 
 
 const App = () => {
   return (
     <NavigationContainer> 
-      <StackNavigator/>
+      <AppState>
+        <StackNavigator />
+      </AppState>
     </NavigationContainer>
     
   )

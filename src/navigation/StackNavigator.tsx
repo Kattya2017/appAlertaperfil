@@ -1,22 +1,50 @@
+import React, { useContext } from 'react'
 import { createStackNavigator } from "@react-navigation/stack";
-import HomeScreen from "../screens/HomeScreen";
 import LoginScreen from "../screens/LoginScreen";
-import AlertasDerivadasScreen from "../screens/AlertasDerivadasScreen";
-import BandejaAlertasScreen from "../screens/BandejaAlertasScreen";
-import ListaInformaticosScrren from "../screens/ListaInformaticosScreen";
-import ReporteAlertaScreen from "../screens/ReporteAlertaScreen";
+import DrawerAdmin from "./DrawerAdmin";
+import DrawerSupervisor from "./DrawerSupervisor";
+import DrawerInformatico from "./DrawerInformatico";
+import AuthContext from '../context/AuthContext';
+import { LoadingScreen } from '../screens/LoadingScreen';
 
 const Stack = createStackNavigator();
 
 export const StackNavigator = () => {
+  const {rol,status} = useContext(AuthContext);
+
+  if(status==='checking')return <LoadingScreen/>
+
   return (
-    <Stack.Navigator>
-      {/*<Stack.Screen name="Login" component={LoginScreen} />*/}
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Derivadas" component={AlertasDerivadasScreen}/>
-      <Stack.Screen name="Bandeja" component={BandejaAlertasScreen}/>
-      <Stack.Screen name="Lista" component={ListaInformaticosScrren}/>
-      <Stack.Screen name="Reporte" component={ReporteAlertaScreen}/>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown:false,
+        
+      }}
+      initialRouteName="DrawerAdmin"
+    >
+      {
+        (status==='not-authenticated')?
+        <>
+        <Stack.Screen name="Login" component={LoginScreen} />
+        </>
+        :(rol==='USER_ADMIN')?
+        <>
+          <Stack.Screen name="Admin" component={DrawerAdmin} /> 
+        </>
+        :
+        (rol==='USER_SUPERVISOR')?
+        <>
+          <Stack.Screen name="Supervisor" component={DrawerSupervisor}/>
+        </>
+        :
+        <>
+        <Stack.Screen name="Informatico" component={DrawerInformatico}/>
+        </>
+      }
+      
+      
+      
+      
     </Stack.Navigator>
   );
 }

@@ -10,13 +10,20 @@ const BandejaAlertasScreen = () => {
         <View style={style.container}>
             <FondoComponent />
             <ScrollView style={style.ContainerScroll}>
-                <View style={{ width: '100%', height: 170, justifyContent: 'center', alignItems: 'center', marginBottom: 10 }}>
+                <View
+                    style={{
+                        width: '100%',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        marginBottom:10
+                    }}
+                >
                     <View style={style.containerCuadro}>
                         <View style={style.imgAlertas}>
                             <Image source={require('../assets/img/alerta/audio-video.png')}
-                                style={{ width: '75%', height: '45%' }} />
+                                style={{ width: '70%', height: 80 }} 
+                            />
                         </View>
-
                         <View style={{ width: '70%', height: '80%' }}>
                             <Text style={style.textCuadro}>SOPORTE TECNICO IMPRESORA</Text>
                             <Text style={style.textAdministrado}>Kattya Jackelin Grados Gonzales</Text>
@@ -29,28 +36,34 @@ const BandejaAlertasScreen = () => {
                                 <TouchableOpacity style={style.clickAgregar}>
                                     <Icon
                                         name='add-outline'
-                                        size={25}
+                                        size={45}
                                         color={'white'} />
                                 </TouchableOpacity>
 
                                 <TouchableOpacity style={style.clickAspa}>
                                     <Icon
                                         name='checkmark-outline'
-                                        size={25}
+                                        size={45}
                                         color={'white'} />
                                 </TouchableOpacity>
                             </View>
                         </View>
                     </View>
                 </View>
-
-                <View style={{ width: '100%', height: 170, justifyContent: 'center', alignItems: 'center', marginBottom: 10 }}>
+                <View
+                    style={{
+                        width: '100%',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        marginBottom:10
+                    }}
+                >
                     <View style={style.containerCuadro}>
                         <View style={style.imgAlertas}>
                             <Image source={require('../assets/img/alerta/audio-video.png')}
-                                style={{ width: '75%', height: '45%' }} />
+                                style={{ width: '70%', height: 80 }} 
+                            />
                         </View>
-
                         <View style={{ width: '70%', height: '80%' }}>
                             <Text style={style.textCuadro}>SOPORTE TECNICO IMPRESORA</Text>
                             <Text style={style.textAdministrado}>Kattya Jackelin Grados Gonzales</Text>
@@ -63,28 +76,34 @@ const BandejaAlertasScreen = () => {
                                 <TouchableOpacity style={style.clickAgregar}>
                                     <Icon
                                         name='add-outline'
-                                        size={25}
+                                        size={45}
                                         color={'white'} />
                                 </TouchableOpacity>
 
                                 <TouchableOpacity style={style.clickAspa}>
                                     <Icon
                                         name='checkmark-outline'
-                                        size={25}
+                                        size={45}
                                         color={'white'} />
                                 </TouchableOpacity>
                             </View>
                         </View>
                     </View>
                 </View>
-
-                <View style={{ width: '100%', height: 170, justifyContent: 'center', alignItems: 'center', marginBottom: 10 }}>
+                <View
+                    style={{
+                        width: '100%',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        marginBottom:10
+                    }}
+                >
                     <View style={style.containerCuadro}>
                         <View style={style.imgAlertas}>
                             <Image source={require('../assets/img/alerta/audio-video.png')}
-                                style={{ width: '75%', height: '45%' }} />
+                                style={{ width: '70%', height: 80 }} 
+                            />
                         </View>
-
                         <View style={{ width: '70%', height: '80%' }}>
                             <Text style={style.textCuadro}>SOPORTE TECNICO IMPRESORA</Text>
                             <Text style={style.textAdministrado}>Kattya Jackelin Grados Gonzales</Text>
@@ -97,28 +116,34 @@ const BandejaAlertasScreen = () => {
                                 <TouchableOpacity style={style.clickAgregar}>
                                     <Icon
                                         name='add-outline'
-                                        size={25}
+                                        size={45}
                                         color={'white'} />
                                 </TouchableOpacity>
 
                                 <TouchableOpacity style={style.clickAspa}>
                                     <Icon
                                         name='checkmark-outline'
-                                        size={25}
+                                        size={45}
                                         color={'white'} />
                                 </TouchableOpacity>
                             </View>
                         </View>
                     </View>
                 </View>
-
-                <View style={{ width: '100%', height: 170, justifyContent: 'center', alignItems: 'center', marginBottom: 10 }}>
+                <View
+                    style={{
+                        width: '100%',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        marginBottom:10
+                    }}
+                >
                     <View style={style.containerCuadro}>
                         <View style={style.imgAlertas}>
                             <Image source={require('../assets/img/alerta/audio-video.png')}
-                                style={{ width: '75%', height: '45%' }} />
+                                style={{ width: '70%', height: 80 }} 
+                            />
                         </View>
-
                         <View style={{ width: '70%', height: '80%' }}>
                             <Text style={style.textCuadro}>SOPORTE TECNICO IMPRESORA</Text>
                             <Text style={style.textAdministrado}>Kattya Jackelin Grados Gonzales</Text>
@@ -131,55 +156,20 @@ const BandejaAlertasScreen = () => {
                                 <TouchableOpacity style={style.clickAgregar}>
                                     <Icon
                                         name='add-outline'
-                                        size={25}
+                                        size={45}
                                         color={'white'} />
                                 </TouchableOpacity>
 
                                 <TouchableOpacity style={style.clickAspa}>
                                     <Icon
                                         name='checkmark-outline'
-                                        size={25}
+                                        size={45}
                                         color={'white'} />
                                 </TouchableOpacity>
                             </View>
                         </View>
                     </View>
                 </View>
-
-                <View style={{ width: '100%', height: 170, justifyContent: 'center', alignItems: 'center', marginBottom: 10 }}>
-                    <View style={style.containerCuadro}>
-                        <View style={style.imgAlertas}>
-                            <Image source={require('../assets/img/alerta/audio-video.png')}
-                                style={{ width: '75%', height: '45%' }} />
-                        </View>
-
-                        <View style={{ width: '70%', height: '80%' }}>
-                            <Text style={style.textCuadro}>SOPORTE TECNICO IMPRESORA</Text>
-                            <Text style={style.textAdministrado}>Kattya Jackelin Grados Gonzales</Text>
-                            <Text style={style.textInformacion}>- Sede de Administracion</Text>
-                            <Text style={style.textInformacion}>- Gerencia de Administración Distrital</Text>
-                            <Text style={style.textInformacion}>- Fecha: 18-09-2023</Text>
-                            <Text style={style.textInformacion}>- Hora: 09:00 a.m</Text>
-
-                            <View style={style.boton}>
-                                <TouchableOpacity style={style.clickAgregar}>
-                                    <Icon
-                                        name='add-outline'
-                                        size={25}
-                                        color={'white'} />
-                                </TouchableOpacity>
-
-                                <TouchableOpacity style={style.clickAspa}>
-                                    <Icon
-                                        name='checkmark-outline'
-                                        size={25}
-                                        color={'white'} />
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    </View>
-                </View>
-
             </ScrollView>
         </View>
     )
@@ -198,12 +188,11 @@ const style = StyleSheet.create({
         flex: 1,
         width,
         height,
-        marginTop: 20
+        marginTop: 20,
     },
 
     containerCuadro: {
-        width: '90%',
-        height: '100%',
+        width: '95%',
         backgroundColor: '#fff',
         borderRadius: 10,
         borderColor: '#840102',
@@ -222,7 +211,6 @@ const style = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         width: '30%',
-        height: '100%',
     },
 
     textCuadro: {
@@ -236,7 +224,6 @@ const style = StyleSheet.create({
     textAdministrado: {
         color: '#004F79',
         width: '100%',
-        height: '20%',
         marginTop: 5,
         fontSize: 14,
         fontWeight: '900'
@@ -245,7 +232,6 @@ const style = StyleSheet.create({
     textInformacion: {
         color: '#343F4B',
         width: '100%',
-        height: '10%',
         fontSize: 12
     },
 
@@ -260,20 +246,14 @@ const style = StyleSheet.create({
 
     clickAgregar: {
         backgroundColor: '#840102',
-        width: '18%',
-        height: '75%',
-        bottom: 3,
         marginLeft: 15,
         borderRadius: 100,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
 
     clickAspa: {
         backgroundColor: '#009F0B',
-        width: '18%',
-        height: '75%',
-        bottom: 3,
         marginLeft: 15,
         borderRadius: 100,
         justifyContent: 'center',
