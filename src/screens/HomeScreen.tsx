@@ -3,18 +3,21 @@ import React,{useEffect,useState} from 'react'
 import { View, StyleSheet, Image, Text, Dimensions, TouchableOpacity } from 'react-native';
 import FondoComponent from '../components/FondoComponent'
 import { DrawerScreenProps } from '@react-navigation/drawer';
+import alertaPerfilApi from '../api/alertaperfilApi';
+import { ResultAlertas } from '../interface/AlertaInterface';
 
 
 const {width,height} = Dimensions.get('window');
 interface Props extends DrawerScreenProps<any, any>{};
 
 const HomeScreen = ({navigation}: Props) => {
-
     const [first, setfirst] = useState('');
 
+
     useEffect(() => {
-        cargarFecha()
+        cargarFecha();
     }, [])
+
     
     const cargarFecha=()=>{
         const date = new Date();
@@ -23,9 +26,9 @@ const HomeScreen = ({navigation}: Props) => {
         console.log(fecha);
         const newFecha= new Date();
         console.log(newFecha.toDateString());
-    }
-    
+    };
 
+   
     return (
         <View style={styles.general}>
             <FondoComponent />
@@ -33,7 +36,7 @@ const HomeScreen = ({navigation}: Props) => {
             <View style={styles.containerContent}>
                 <TouchableOpacity style={styles.container} onPress={() => navigation.navigate('Alerta')}>
                     <View style={styles.imageContainer}>
-                        <Image style={styles.logoImagen} source={require('../assets/img/alerta/redes-problema.png')} />
+                        <Image style={styles.logoImagen} source={require('../assets/img/alerta/redes-problema.png')}/>
                     </View>
                     <View style={styles.palabras}>
                         <Text style={styles.texto}>SERVICIO TECNICO DE IMPRESORA</Text>
