@@ -3,10 +3,10 @@
 export interface ResultAlertas {
     ok:   boolean;
     msg:  string;
-    resp: Resp[];
+    resp: Alertas[];
 }
 
-export interface Resp {
+export interface Alertas {
     id:              number;
     fecha:           string;
     hora:            string;
@@ -16,6 +16,7 @@ export interface Resp {
     descripcion:     string;
     Administrado:    Administrado;
     TipoAlertum:     TipoAlertum;
+    estado?:          number;
 }
 
 export interface Administrado {
