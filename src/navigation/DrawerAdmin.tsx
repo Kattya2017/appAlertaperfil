@@ -1,9 +1,8 @@
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import HomeScreen from '../screens/HomeScreen';
-import AlertasDerivadasScreen from '../screens/AlertasDerivadasScreen';
 import MenuComponent from '../components/MenuComponent';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import StackAdmin from './StackAdmin';
 
 const Drawer = createDrawerNavigator();
 
@@ -19,18 +18,12 @@ const DrawerAdmin=()=> {
       unmountOnBlur:true
     }}
     >
-      <Drawer.Screen name="Home" component={HomeScreen}
+      <Drawer.Screen name="Home" component={StackAdmin}
       options={{
         drawerIcon:({color}) => (
           <Ionicons name='home-sharp' size={22} color={color} />)}}/>
 
-      <Drawer.Screen name="Alerta" component={AlertasDerivadasScreen}
-      options={{
-        drawerIcon:({color})=>(
-          <Ionicons name='alert-circle-sharp' size={22} color={color} />
-        )
-      }}
-      />
+      
     </Drawer.Navigator>
   );
 }

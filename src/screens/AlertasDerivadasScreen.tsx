@@ -1,27 +1,93 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react'
 import { View, StyleSheet, Image, Dimensions, Text, TouchableOpacity } from 'react-native';
 import FondoComponent from '../components/FondoComponent';
-import Dropdown from 'react-native-input-select';
-import { DrawerScreenProps } from '@react-navigation/drawer';
+import { StackScreenProps } from '@react-navigation/stack';
+import { RootStackParamsAdmin } from '../navigation/StackAdmin';
+import alertaPerfilApi from '../api/alertaperfilApi';
+import { ResultOrgano } from '../interface/OrganoInterface';
+import { ResultUnidadOrganica } from '../interface/UnidadInterface';
+import { ResultArea, Sede } from '../interface/AreaInterface';
+import { Informatico, ResultInformatico } from '../interface/UsuarioInterface';
 
 const {width, height} = Dimensions.get('window');
-interface Props extends DrawerScreenProps<any, any>{};
+interface Props extends StackScreenProps<RootStackParamsAdmin, 'Alertas'>{};
 
 
-const AlertasDerivadasScreen = ({navigation}:Props) => {
+const AlertasDerivadasScreen = ({navigation,route}:Props) => {
+
+  const [sede, setSede] = useState('');
+  const [organo, setOrgano] = useState('');
+  const [unidad, setUnidad] = useState('');
+  const [area, setArea] = useState('');
+  const [informatico, setInformatico] = useState<Informatico[]>([])
+  useEffect(() => {
+    mostrarJurisdiccion();
+  }, [])
+  
+
+
+  const mostrarJurisdiccion = async()=>{
+    try {
+      switch (String(route.params.tipo_area)) {
+        case '1':
+          const organo = await alertaPerfilApi.get<ResultOrgano>(`/organo/${route.params.area}`);
+          console.log(organo.data.resp);
+          setSede(organo.data.resp.Sede.nombre);
+          setOrgano(organo.data.resp.nombre);
+          setUnidad('');
+          setArea('');
+          break;
+        case '2':
+          const unidad = await alertaPerfilApi.get<ResultUnidadOrganica>(`/unidadorganica/${route.params.area}`);
+          console.log(unidad.data.resp);
+          setSede(unidad.data.resp.Organo.Sede.nombre);
+          setOrgano(unidad.data.resp.Organo.nombre);
+          setUnidad(unidad.data.resp.nombre);
+          setArea('');
+          break;
+        case '3':
+          const area = await alertaPerfilApi.get<ResultArea>(`/area/${route.params.area}`);
+          console.log(area.data.resp);
+          setSede(area.data.resp.UnidadOrganica.Organo.Sede.nombre);
+          setOrgano(area.data.resp.UnidadOrganica.Organo.nombre);
+          setUnidad(area.data.resp.UnidadOrganica.nombre);
+          setArea(area.data.resp.nombre);
+          break;
+        default:
+          break;
+      }
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+  const mostrarInformatico =async()=>{
+    try {
+      const resp= await alertaPerfilApi.get<ResultInformatico>('/usuario/user/informatico');
+      
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
   return (
     <View style={style.container}>
       <FondoComponent/>
       <View style={style.subContainer}>
-        <Text style={style.textPrincipal}>SOPORTE TECNICO IMPRESORA</Text>
+        <Text style={style.textPrincipal}>{route.params.alerta}</Text>
         <View style={{width:'85%', marginTop:70}}>
          
-          <Text style={style.textDescripcion}>SEDE: Sede Administrativa</Text>
-          <Text style={style.textDescripcion}>ORGANO: Gerencia de Administración Distrital</Text>
-          <Text style={style.textDescripcion}>UNIDAD: Unidad de Administración y Finanzas</Text>
-          <Text style={style.textDescripcion}>AREA: Coordinación de Contabilidad</Text>
-          <Text style={style.textDescripcion}>Fecha   :</Text>
-          <Text style={style.textDescripcion}>Hora     :</Text>
+          <Text style={style.textDescripcion}>Administrado: {route.params.administrado}</Text>
+          <Text style={style.textDescripcion}>SEDE: {sede}</Text>
+          <Text style={style.textDescripcion}>ORGANO: {organo}</Text>
+          {
+            (unidad!=='')?<Text style={style.textDescripcion}>UNIDAD: {unidad}</Text>:''
+          }
+          {
+            (area!=='')?<Text style={style.textDescripcion}>AREA: {area}</Text>:''
+          }
+          <Text style={style.textDescripcion}>Fecha   :{route.params.fecha}</Text>
+          <Text style={style.textDescripcion}>Hora     :{route.params.hora}</Text>
         
         </View>
        
@@ -101,7 +167,6 @@ const style = StyleSheet.create({
       justifyContent:'center',
       alignItems:'center',
       borderRadius:10,
-      marginTop:'35%'
     },
 
     BtnTexto:{
