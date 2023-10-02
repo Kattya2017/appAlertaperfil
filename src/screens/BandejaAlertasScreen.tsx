@@ -1,175 +1,99 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Dimensions, Image, ScrollView, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import FondoComponent from '../components/FondoComponent';
-import Icon from 'react-native-vector-icons/Ionicons';
+import alertaPerfilApi from '../api/alertaperfilApi';
+import { Derivada, ResultAlertasDerivadas } from '../interface/AlertaDerivadaInterface';
+import { StackScreenProps } from '@react-navigation/stack';
+import { RootStackParamsInformatico } from '../navigation/StackInformatico';
+import socket from '../socket/socketApi';
+
+
+
+interface Props extends StackScreenProps<RootStackParamsInformatico, 'Inicio'> { };
 
 const { width, height } = Dimensions.get('window');
+const BandejaAlertasScreen = ({navigation}:Props) => {
 
-const BandejaAlertasScreen = () => {
+    const [listAlertas, setListAlertas] = useState<Derivada[]>([])
+
+    useEffect(() => {
+        mostrarAlerta();
+    }, [])
+    useEffect(() => {
+      eschucharSocket();
+    }, [])
+    
+
+    const mostrarAlerta = async () => {
+        try {
+            const resp = await alertaPerfilApi.get<ResultAlertasDerivadas>('/alertaderivada/alerta/informatico');
+            setListAlertas(resp.data.resp)
+        } catch (error) {
+            console.log(error);
+
+        }
+    }
+    const eschucharSocket = async () => {
+        socket.on(`nueva-alerta-derivada`, () => {
+            mostrarAlerta()
+        })
+    }
     return (
         <View style={style.container}>
             <FondoComponent />
             <ScrollView style={style.ContainerScroll}>
-                <View
-                    style={{
-                        width: '100%',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        marginBottom:10
-                    }}
-                >
-                    <View style={style.containerCuadro}>
-                        <View style={style.imgAlertas}>
-                            <Image source={require('../assets/img/alerta/audio-video.png')}
-                                style={{ width: '70%', height: 80 }} 
-                            />
-                        </View>
-                        <View style={{ width: '70%', height: '80%' }}>
-                            <Text style={style.textCuadro}>SOPORTE TECNICO IMPRESORA</Text>
-                            <Text style={style.textAdministrado}>Kattya Jackelin Grados Gonzales</Text>
-                            <Text style={style.textInformacion}>- Sede de Administracion</Text>
-                            <Text style={style.textInformacion}>- Gerencia de Administración Distrital</Text>
-                            <Text style={style.textInformacion}>- Fecha: 18-09-2023</Text>
-                            <Text style={style.textInformacion}>- Hora: 09:00 a.m</Text>
+                {
+                    listAlertas.map((resp, index) => {
+                        return (
+                            <View
+                                key={resp.id}
+                                style={{
+                                    width: '100%',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    marginBottom: 10
+                                }}
+                            >
+                                <View style={style.containerCuadro}>
+                                    <View style={style.imgAlertas}>
+                                        <Image source={require('../assets/img/alerta/audio-video.png')}
+                                            style={{ width: '70%', height: 90 }}
+                                        />
+                                    </View>
+                                    <View style={{ width: '70%', marginBottom: 10 }}>
+                                        <Text style={style.textCuadro}>{resp.Alertum.TipoAlertum.descripcion}</Text>
+                                        <Text style={style.textAdministrado}>{resp.Alertum.Administrado.nombre} {resp.Alertum.Administrado.apellido}</Text>
 
-                            <View style={style.boton}>
-                                <TouchableOpacity style={style.clickAgregar}>
-                                    <Icon
-                                        name='add-outline'
-                                        size={45}
-                                        color={'white'} />
-                                </TouchableOpacity>
+                                        <Text style={style.textInformacion}>-{resp.sede}</Text>
+                                        <Text style={style.textInformacion}>-ORGANO: {resp.organo}</Text>
+                                        {
+                                            (resp.unidad) ? <Text style={style.textInformacion}>-UNIDAD: {resp.unidad}</Text> : ''
+                                        }
+                                        {
+                                            (resp.area) ? <Text style={style.textInformacion}>-UNIDAD: {resp.area}</Text> : ''
+                                        }
+                                        <Text style={style.textInformacion}>- Fecha: {resp.fecha_inicio}</Text>
+                                        <Text style={style.textInformacion}>- Hora: {resp.hora_inicio}</Text>
+                                        <View
+                                            style={{ marginTop: 10 }}
+                                        >
+                                            <TouchableOpacity
+                                                style={style.boton}
+                                                onPress={()=>navigation.navigate('Alertas',{id_alerta:resp.id})}
+                                            >
+                                                <Text style={{
+                                                    color: 'white'
+                                                }}>Atender</Text>
+                                            </TouchableOpacity>
+                                        </View>
 
-                                <TouchableOpacity style={style.clickAspa}>
-                                    <Icon
-                                        name='checkmark-outline'
-                                        size={45}
-                                        color={'white'} />
-                                </TouchableOpacity>
+                                    </View>
+
+                                </View>
                             </View>
-                        </View>
-                    </View>
-                </View>
-                <View
-                    style={{
-                        width: '100%',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        marginBottom:10
-                    }}
-                >
-                    <View style={style.containerCuadro}>
-                        <View style={style.imgAlertas}>
-                            <Image source={require('../assets/img/alerta/audio-video.png')}
-                                style={{ width: '70%', height: 80 }} 
-                            />
-                        </View>
-                        <View style={{ width: '70%', height: '80%' }}>
-                            <Text style={style.textCuadro}>SOPORTE TECNICO IMPRESORA</Text>
-                            <Text style={style.textAdministrado}>Kattya Jackelin Grados Gonzales</Text>
-                            <Text style={style.textInformacion}>- Sede de Administracion</Text>
-                            <Text style={style.textInformacion}>- Gerencia de Administración Distrital</Text>
-                            <Text style={style.textInformacion}>- Fecha: 18-09-2023</Text>
-                            <Text style={style.textInformacion}>- Hora: 09:00 a.m</Text>
-
-                            <View style={style.boton}>
-                                <TouchableOpacity style={style.clickAgregar}>
-                                    <Icon
-                                        name='add-outline'
-                                        size={45}
-                                        color={'white'} />
-                                </TouchableOpacity>
-
-                                <TouchableOpacity style={style.clickAspa}>
-                                    <Icon
-                                        name='checkmark-outline'
-                                        size={45}
-                                        color={'white'} />
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    </View>
-                </View>
-                <View
-                    style={{
-                        width: '100%',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        marginBottom:10
-                    }}
-                >
-                    <View style={style.containerCuadro}>
-                        <View style={style.imgAlertas}>
-                            <Image source={require('../assets/img/alerta/audio-video.png')}
-                                style={{ width: '70%', height: 80 }} 
-                            />
-                        </View>
-                        <View style={{ width: '70%', height: '80%' }}>
-                            <Text style={style.textCuadro}>SOPORTE TECNICO IMPRESORA</Text>
-                            <Text style={style.textAdministrado}>Kattya Jackelin Grados Gonzales</Text>
-                            <Text style={style.textInformacion}>- Sede de Administracion</Text>
-                            <Text style={style.textInformacion}>- Gerencia de Administración Distrital</Text>
-                            <Text style={style.textInformacion}>- Fecha: 18-09-2023</Text>
-                            <Text style={style.textInformacion}>- Hora: 09:00 a.m</Text>
-
-                            <View style={style.boton}>
-                                <TouchableOpacity style={style.clickAgregar}>
-                                    <Icon
-                                        name='add-outline'
-                                        size={45}
-                                        color={'white'} />
-                                </TouchableOpacity>
-
-                                <TouchableOpacity style={style.clickAspa}>
-                                    <Icon
-                                        name='checkmark-outline'
-                                        size={45}
-                                        color={'white'} />
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    </View>
-                </View>
-                <View
-                    style={{
-                        width: '100%',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        marginBottom:10
-                    }}
-                >
-                    <View style={style.containerCuadro}>
-                        <View style={style.imgAlertas}>
-                            <Image source={require('../assets/img/alerta/audio-video.png')}
-                                style={{ width: '70%', height: 80 }} 
-                            />
-                        </View>
-                        <View style={{ width: '70%', height: '80%' }}>
-                            <Text style={style.textCuadro}>SOPORTE TECNICO IMPRESORA</Text>
-                            <Text style={style.textAdministrado}>Kattya Jackelin Grados Gonzales</Text>
-                            <Text style={style.textInformacion}>- Sede de Administracion</Text>
-                            <Text style={style.textInformacion}>- Gerencia de Administración Distrital</Text>
-                            <Text style={style.textInformacion}>- Fecha: 18-09-2023</Text>
-                            <Text style={style.textInformacion}>- Hora: 09:00 a.m</Text>
-
-                            <View style={style.boton}>
-                                <TouchableOpacity style={style.clickAgregar}>
-                                    <Icon
-                                        name='add-outline'
-                                        size={45}
-                                        color={'white'} />
-                                </TouchableOpacity>
-
-                                <TouchableOpacity style={style.clickAspa}>
-                                    <Icon
-                                        name='checkmark-outline'
-                                        size={45}
-                                        color={'white'} />
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    </View>
-                </View>
+                        )
+                    })
+                }
             </ScrollView>
         </View>
     )
@@ -231,31 +155,15 @@ const style = StyleSheet.create({
 
     textInformacion: {
         color: '#343F4B',
-        width: '100%',
+        width: '95%',
         fontSize: 12
     },
 
     boton: {
-        width: '100%',
-        flexDirection: 'row',
-        marginTop: 40,
-        justifyContent: 'space-evenly',
-        right: 15,
-        bottom: 30
-    },
-
-    clickAgregar: {
-        backgroundColor: '#840102',
-        marginLeft: 15,
-        borderRadius: 100,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-
-    clickAspa: {
         backgroundColor: '#009F0B',
-        marginLeft: 15,
-        borderRadius: 100,
+        padding: 10,
+        width: '80%',
+        borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center'
     },

@@ -1,6 +1,7 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from '../screens/HomeScreen';
 import AlertasDerivadasScreen from '../screens/AlertasDerivadasScreen';
+import ReporteAdminScreen from '../screens/ReporteAdminScreen';
 
 
 
@@ -28,6 +29,7 @@ const StackAdmin=()=> {
     >
       <Stack.Screen name="Inicio" component={HomeScreen} />
       <Stack.Screen name="Alertas" component={AlertasDerivadasScreen} />
+      
     </Stack.Navigator>
   );
 }

@@ -1,92 +1,67 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, View, Text, ScrollView, Dimensions, Image, TouchableOpacity } from 'react-native';
 import FondoComponent from '../components/FondoComponent';
 import { StackScreenProps } from '@react-navigation/stack';
+import { RootStackParamsSupervisor } from '../navigation/StackSupervisor';
+import alertaPerfilApi from '../api/alertaperfilApi';
+import { Informatico, ResultInformatico } from '../interface/UsuarioInterface';
 
 
 const { width, height } = Dimensions.get('window');
-interface Props extends StackScreenProps<any, any> { };
+interface Props extends StackScreenProps<RootStackParamsSupervisor, 'Inicio'> { };
 
 const ListaInformaticosScrren = ({ navigation }: Props) => {
+    const [listInformatico, setListInformatico] = useState<Informatico[]>([]);
+
+    useEffect(() => {
+        mostrarInformatico();
+    }, [])
+
+    const mostrarInformatico = async () => {
+        try {
+            const resp = await alertaPerfilApi.get<ResultInformatico>('/usuario/user/informatico');
+            setListInformatico(resp.data.resp);
+            console.log(resp.data.resp);
+        } catch (error) {
+            console.log(error);
+
+        }
+    }
+
     return (
         <View style={styles.container}>
             <FondoComponent />
             <ScrollView style={styles.scrollContainer}>
-                <View style={{ width, height, alignItems: 'center' }}>
-                    <TouchableOpacity style={styles.cuadroContainer} onPress={() => navigation.navigate('Reporte')}>
-                        <View style={styles.igmInformatico}>
-                            <Image source={require('../assets/img/informatico.png')}
-                                style={{ width: '70%', height: '70%' }} />
-                        </View>
+                {
+                    listInformatico.map((resp, index) => {
+                        return (
+                            <View
+                                key={resp.id}
+                                style={{
+                                    width: '100%',
+                                    height: 120,
+                                    alignItems: 'center',
+                                    marginBottom: 10
+                                }}
+                            >
+                                <TouchableOpacity 
+                                    style={styles.cuadroContainer}
+                                    onPress={()=>{navigation.navigate('Reporte',{id_usuario:resp.id,nombre:`${resp.nombre} ${resp.apellido}`})}}
+                                >
+                                    <View style={styles.igmInformatico}>
+                                        <Image source={require('../assets/img/informatico.png')}
+                                            style={{ height: '80%', width: '90%' }} />
+                                    </View>
 
-                        <View style={{ width: '70%', height: '80%' }}>
-                            <Text style={styles.textInformatico}>ROGER PANDURO LOPEZ</Text>
-                            <Text style={styles.textCargo}>SOPORTE DE IMPRESORA</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.cuadroContainer}>
-                        <View style={styles.igmInformatico}>
-                            <Image source={require('../assets/img/informatico.png')}
-                                style={{ width: '70%', height: '70%' }} />
-                        </View>
-
-                        <View style={{ width: '70%', height: '80%' }}>
-                            <Text style={styles.textInformatico}>ROGER PANDURO LOPEZ</Text>
-                            <Text style={styles.textCargo}>SOPORTE DE IMPRESORA</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.cuadroContainer}>
-                        <View style={styles.igmInformatico}>
-                            <Image source={require('../assets/img/informatico.png')}
-                                style={{ width: '70%', height: '70%' }} />
-                        </View>
-
-                        <View style={{ width: '70%', height: '80%' }}>
-                            <Text style={styles.textInformatico}>ROGER PANDURO LOPEZ</Text>
-                            <Text style={styles.textCargo}>SOPORTE DE IMPRESORA</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.cuadroContainer}>
-                        <View style={styles.igmInformatico}>
-                            <Image source={require('../assets/img/informatico.png')}
-                                style={{ width: '70%', height: '70%' }} />
-                        </View>
-
-                        <View style={{ width: '70%', height: '80%' }}>
-                            <Text style={styles.textInformatico}>ROGER PANDURO LOPEZ</Text>
-                            <Text style={styles.textCargo}>SOPORTE DE IMPRESORA</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.cuadroContainer}>
-                        <View style={styles.igmInformatico}>
-                            <Image source={require('../assets/img/informatico.png')}
-                                style={{ width: '70%', height: '70%' }} />
-                        </View>
-
-                        <View style={{ width: '70%', height: '80%' }}>
-                            <Text style={styles.textInformatico}>ROGER PANDURO LOPEZ</Text>
-                            <Text style={styles.textCargo}>SOPORTE DE IMPRESORA</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.cuadroContainer}>
-                        <View style={styles.igmInformatico}>
-                            <Image source={require('../assets/img/informatico.png')}
-                                style={{ width: '70%', height: '70%' }} />
-                        </View>
-
-                        <View style={{ width: '70%', height: '80%' }}>
-                            <Text style={styles.textInformatico}>ROGER PANDURO LOPEZ</Text>
-                            <Text style={styles.textCargo}>SOPORTE DE IMPRESORA</Text>
-                        </View>
-                    </TouchableOpacity>
-
-
-
-
-                </View>
-
+                                    <View style={{ width: '70%', height: '100%', justifyContent: 'center' }}>
+                                        <Text style={styles.textInformatico}>{resp.nombre} {resp.apellido}</Text>
+                                    </View>
+                                </TouchableOpacity>
+                            </View>
+                        )
+                    })
+                }
             </ScrollView>
-
 
         </View>
     )
@@ -98,19 +73,18 @@ export default ListaInformaticosScrren;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+
     },
 
     scrollContainer: {
         flex: 1,
         width,
         height,
+        marginTop: 10
     },
-
     cuadroContainer: {
         width: '90%',
-        height: 100,
-        top: 20,
-        marginBottom: 10,
+        height: '100%',
         backgroundColor: '#fff',
         borderRadius: 10,
         borderColor: '#840102',
@@ -129,13 +103,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         width: '30%',
-        height: '100%'
     },
 
     textInformatico: {
         color: '#840102',
         width: '100%',
-        marginTop: 20,
         fontWeight: '900',
         fontSize: 16
     },
@@ -143,7 +115,6 @@ const styles = StyleSheet.create({
     textCargo: {
         color: '#3D3D3D',
         width: '100%',
-        height: '20%',
         marginTop: 5,
         fontWeight: '800'
     }
