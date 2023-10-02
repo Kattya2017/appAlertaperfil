@@ -1,5 +1,5 @@
 import io from 'socket.io-client';
 
-const socket = io("http://192.168.1.46:4000");
+const socket = io("https://alertacsjuc.gongalsoft.com");
 
 export default socket;
