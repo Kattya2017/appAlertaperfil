@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Dimensions, Image, ScrollView, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import FondoComponent from '../components/FondoComponent';
 import alertaPerfilApi from '../api/alertaperfilApi';
-import { Derivada, ResultAlertasDerivadas } from '../interface/AlertaDerivadaInterface';
+import { Derivada, ResultAlertasDerivadas, Administrado } from '../interface/AlertaDerivadaInterface';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamsInformatico } from '../navigation/StackInformatico';
 import socket from '../socket/socketApi';
@@ -74,6 +74,7 @@ const BandejaAlertasScreen = ({navigation}:Props) => {
                                         }
                                         <Text style={style.textInformacion}>- Fecha: {resp.fecha_inicio}</Text>
                                         <Text style={style.textInformacion}>- Hora: {resp.hora_inicio}</Text>
+                                        <Text style={style.textInformacion}>- Telefono: {resp.Alertum.Administrado.telefono}</Text>
                                         <View
                                             style={{ marginTop: 10 }}
                                         >

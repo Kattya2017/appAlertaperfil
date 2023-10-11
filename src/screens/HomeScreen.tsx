@@ -76,7 +76,8 @@ const HomeScreen = ({ navigation }: Props) => {
                                                 area: resp.Administrado.area,
                                                 tipo_area: resp.Administrado.tipo_area,
                                                 id_alerta: resp.id,
-                                                administrado: `${resp.Administrado.nombre} ${resp.Administrado.apellido}`
+                                                administrado: `${resp.Administrado.nombre} ${resp.Administrado.apellido}`,
+                                                telefono:resp.Administrado.telefono
                                             })
                                         }
                                     }}

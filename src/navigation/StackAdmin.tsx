@@ -15,7 +15,8 @@ export type RootStackParamsAdmin = {
     alerta:string,
     tipo_area:number,
     area:number,
-    administrado:string
+    administrado:string,
+    telefono:string
   }
 }
 const Stack = createStackNavigator<RootStackParamsAdmin>();

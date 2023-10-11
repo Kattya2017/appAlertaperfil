@@ -27,6 +27,7 @@ export interface Administrado {
     dni:       string;
     tipo_area: number;
     area:      number;
+    telefono:  string;
 }
 
 export interface TipoAlertum {

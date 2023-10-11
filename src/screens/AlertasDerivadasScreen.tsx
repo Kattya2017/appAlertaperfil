@@ -112,7 +112,7 @@ const AlertasDerivadasScreen = ({ navigation, route }: Props) => {
       <FondoComponent />
       <View style={style.subContainer}>
         <Text style={style.textPrincipal}>{route.params.alerta}</Text>
-        <View style={{ width: '85%', marginTop: 70 }}>
+        <View style={{ width: '95%', marginTop: 20 }}>
 
           <Text style={style.textDescripcion}>Administrado: {route.params.administrado}</Text>
           <Text style={style.textDescripcion}>SEDE: {sede}</Text>
@@ -123,12 +123,12 @@ const AlertasDerivadasScreen = ({ navigation, route }: Props) => {
           {
             (area !== '') ? <Text style={style.textDescripcion}>AREA: {area}</Text> : ''
           }
-          <Text style={style.textDescripcion}>Fecha   :{route.params.fecha}</Text>
+          <Text style={style.textDescripcion}>Fecha    :{route.params.fecha}</Text>
           <Text style={style.textDescripcion}>Hora     :{route.params.hora}</Text>
-
+          <Text style={style.textDescripcion}>Telefono     :{route.params.telefono}</Text>
         </View>
 
-        <View style={{ justifyContent: 'center', alignItems: 'center',width:'100%' }}>
+        <View style={{ justifyContent: 'center', alignItems: 'center',width:'100%', marginTop:10}}>
 
           <View style={{
             width:'90%'
@@ -207,7 +207,6 @@ const style = StyleSheet.create({
     fontSize: 13,
     justifyContent: 'center',
     alignItems: 'center',
-    bottom: 60,
     left: 15
   },
 
@@ -217,7 +216,6 @@ const style = StyleSheet.create({
     fontSize: 15,
     justifyContent: 'center',
     alignItems: 'center',
-    bottom: 60,
     left: 15
   },
 
