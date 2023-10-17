@@ -15,11 +15,12 @@ const DrawerInformatico=()=> {
       drawerActiveTintColor:'#fff',
       drawerInactiveTintColor:'#333',
       drawerLabelStyle:{marginLeft: -20, fontSize: 15},
-      unmountOnBlur: true
+      unmountOnBlur: true,
+      //headerShown:false
     }}
     >
 
-      <Drawer.Screen name="Bandeja" component={StackInformatico}
+    <Drawer.Screen name="Bandeja" component={StackInformatico}
       options={{
         drawerIcon:({color})=>(
         <Ionicons name='mail-sharp' size={22} color={color}/>

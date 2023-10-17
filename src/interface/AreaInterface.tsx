@@ -11,6 +11,7 @@ export interface Area {
     nombre:             string;
     estado:             number;
     id_unidad_organica: number;
+    anexo:string;
     UnidadOrganica:     UnidadOrganica;
 }
 

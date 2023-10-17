@@ -22,7 +22,8 @@ const BandejaAlertasScreen = ({navigation}:Props) => {
     useEffect(() => {
       eschucharSocket();
     }, [])
-    
+
+
 
     const mostrarAlerta = async () => {
         try {
@@ -56,8 +57,8 @@ const BandejaAlertasScreen = ({navigation}:Props) => {
                             >
                                 <View style={style.containerCuadro}>
                                     <View style={style.imgAlertas}>
-                                        <Image source={require('../assets/img/alerta/audio-video.png')}
-                                            style={{ width: '70%', height: 90 }}
+                                        <Image source={{uri:`http://192.168.76.127:4000/api/uploads/tipoalerta/${resp.Alertum.TipoAlertum.id}/asasa`}}
+                                            style={{ width: '80%', height: 81 }}
                                         />
                                     </View>
                                     <View style={{ width: '70%', marginBottom: 10 }}>
@@ -75,6 +76,7 @@ const BandejaAlertasScreen = ({navigation}:Props) => {
                                         <Text style={style.textInformacion}>- Fecha: {resp.fecha_inicio}</Text>
                                         <Text style={style.textInformacion}>- Hora: {resp.hora_inicio}</Text>
                                         <Text style={style.textInformacion}>- Telefono: {resp.Alertum.Administrado.telefono}</Text>
+                                        <Text style={style.textInformacion}>- Anexo: {resp.anexo}</Text>
                                         <View
                                             style={{ marginTop: 10 }}
                                         >
@@ -168,4 +170,5 @@ const style = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
+
 })

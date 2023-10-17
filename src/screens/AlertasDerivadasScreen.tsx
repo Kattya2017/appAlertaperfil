@@ -21,6 +21,7 @@ const AlertasDerivadasScreen = ({ navigation, route }: Props) => {
   const [organo, setOrgano] = useState('');
   const [unidad, setUnidad] = useState('');
   const [area, setArea] = useState('');
+  const [anexo, setAnexo] = useState('');
   const [listInformatico, setListInformatico] = useState<Informatico[]>([]);
   const [informatico, setInformatico] = useState('');
   useEffect(() => {
@@ -37,6 +38,7 @@ const AlertasDerivadasScreen = ({ navigation, route }: Props) => {
       switch (String(route.params.tipo_area)) {
         case '1':
           const organo = await alertaPerfilApi.get<ResultOrgano>(`/organo/${route.params.area}`);
+          setAnexo(organo.data.resp.anexo);
           setSede(organo.data.resp.Sede.nombre);
           setOrgano(organo.data.resp.nombre);
           setUnidad('');
@@ -44,6 +46,7 @@ const AlertasDerivadasScreen = ({ navigation, route }: Props) => {
           break;
         case '2':
           const unidad = await alertaPerfilApi.get<ResultUnidadOrganica>(`/unidadorganica/${route.params.area}`);
+          setAnexo(unidad.data.resp.anexo);
           setSede(unidad.data.resp.Organo.Sede.nombre);
           setOrgano(unidad.data.resp.Organo.nombre);
           setUnidad(unidad.data.resp.nombre);
@@ -51,6 +54,7 @@ const AlertasDerivadasScreen = ({ navigation, route }: Props) => {
           break;
         case '3':
           const area = await alertaPerfilApi.get<ResultArea>(`/area/${route.params.area}`);
+          setAnexo(area.data.resp.anexo);
           setSede(area.data.resp.UnidadOrganica.Organo.Sede.nombre);
           setOrgano(area.data.resp.UnidadOrganica.Organo.nombre);
           setUnidad(area.data.resp.UnidadOrganica.nombre);
@@ -87,17 +91,14 @@ const AlertasDerivadasScreen = ({ navigation, route }: Props) => {
           sede,
           organo,
           unidad,
-          area
+          area,
+          anexo
         }
         console.log(data);
         
         const resp = await alertaPerfilApi.post('/alertaderivada',data);
         socket.emit('nueva-alerta-derivada');
-        setSede('');
-        setOrgano('');
-        setUnidad('');
-        setInformatico('');
-        setListInformatico([]);
+        
         navigation.push('Inicio');
       }
       
@@ -126,6 +127,7 @@ const AlertasDerivadasScreen = ({ navigation, route }: Props) => {
           <Text style={style.textDescripcion}>Fecha    :{route.params.fecha}</Text>
           <Text style={style.textDescripcion}>Hora     :{route.params.hora}</Text>
           <Text style={style.textDescripcion}>Telefono     :{route.params.telefono}</Text>
+          <Text style={style.textDescripcion}>Anexo     :{anexo}</Text>
         </View>
 
         <View style={{ justifyContent: 'center', alignItems: 'center',width:'100%', marginTop:10}}>

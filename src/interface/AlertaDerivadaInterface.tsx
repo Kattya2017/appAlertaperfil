@@ -21,6 +21,7 @@ export interface Derivada {
     organo:       string;
     unidad:       string;
     area:         string;
+    anexo:        string;
     Alertum:      Alertum;
 }
 

@@ -11,6 +11,7 @@ export interface Unidad {
     nombre:    string;
     estado:    number;
     id_organo: number;
+    anexo:string;
     Organo:    Organo;
 }
 

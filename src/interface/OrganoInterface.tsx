@@ -11,6 +11,7 @@ export interface Organo {
     nombre:  string;
     estado:  number;
     id_sede: number;
+    anexo:string;
     Sede:    Sede;
 }
 
