@@ -1,8 +1,8 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import BandejaAlertasScreen from '../screens/BandejaAlertasScreen';
 import MenuComponent from '../components/MenuComponent';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import StackInformatico from './StackInformatico';
+import { Image } from 'react-native';
 
 const Drawer = createDrawerNavigator();
 
@@ -17,6 +17,23 @@ const DrawerInformatico=()=> {
       drawerLabelStyle:{marginLeft: -20, fontSize: 15},
       unmountOnBlur: true,
       //headerShown:false
+      headerStyle: {
+        backgroundColor: '#980000',
+      },
+      headerTintColor: 'white',
+      headerTitle: () => {
+        return <>
+            <Image
+              source={require('../assets/img/menu/barra.png')}
+              style={{
+                width: 90,
+                height: '85%',
+                alignItems: 'center',
+                left: 75
+              }}
+            />
+        </>
+      }
     }}
     >
 

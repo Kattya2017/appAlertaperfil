@@ -69,6 +69,18 @@ const HomeScreen = ({ navigation }: Props) => {
                                         if (resp.estado === 1) {
                                             Alert.alert('Alerta Derivada', 'Esta alerta ya fue asignada a un personal de informatica, vaya la seccion alertas derivadas para ver su proceso')
                                         } else {
+                                            console.log({
+                                                alerta: resp.TipoAlertum.descripcion,
+                                                fecha: resp.fecha,
+                                                hora: resp.hora,
+                                                area: resp.Administrado.area,
+                                                tipo_area: resp.Administrado.tipo_area,
+                                                id_alerta: resp.id,
+                                                administrado: `${resp.Administrado.nombre} ${resp.Administrado.apellido}`,
+                                                telefono:resp.Administrado.telefono,
+                                                anexo:resp.Administrado.anexo
+                                            });
+                                            
                                             navigation.navigate('Alertas', {
                                                 alerta: resp.TipoAlertum.descripcion,
                                                 fecha: resp.fecha,
@@ -77,7 +89,8 @@ const HomeScreen = ({ navigation }: Props) => {
                                                 tipo_area: resp.Administrado.tipo_area,
                                                 id_alerta: resp.id,
                                                 administrado: `${resp.Administrado.nombre} ${resp.Administrado.apellido}`,
-                                                telefono:resp.Administrado.telefono
+                                                telefono:resp.Administrado.telefono,
+                                                anexo:resp.Administrado.anexo
                                             })
                                         }
                                     }}

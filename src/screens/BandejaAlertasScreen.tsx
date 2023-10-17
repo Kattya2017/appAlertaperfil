@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Dimensions, Image, ScrollView, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import FondoComponent from '../components/FondoComponent';
 import alertaPerfilApi from '../api/alertaperfilApi';
-import { Derivada, ResultAlertasDerivadas, Administrado } from '../interface/AlertaDerivadaInterface';
+import { Derivada, ResultAlertasDerivadas } from '../interface/AlertaDerivadaInterface';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamsInformatico } from '../navigation/StackInformatico';
 import socket from '../socket/socketApi';
@@ -57,7 +57,7 @@ const BandejaAlertasScreen = ({navigation}:Props) => {
                             >
                                 <View style={style.containerCuadro}>
                                     <View style={style.imgAlertas}>
-                                        <Image source={{uri:`http://192.168.76.127:4000/api/uploads/tipoalerta/${resp.Alertum.TipoAlertum.id}/asasa`}}
+                                        <Image source={{uri:`http://192.168.1.46:4000/api/uploads/tipoalerta/${resp.Alertum.TipoAlertum.id}/asasa`}}
                                             style={{ width: '80%', height: 81 }}
                                         />
                                     </View>
@@ -76,7 +76,7 @@ const BandejaAlertasScreen = ({navigation}:Props) => {
                                         <Text style={style.textInformacion}>- Fecha: {resp.fecha_inicio}</Text>
                                         <Text style={style.textInformacion}>- Hora: {resp.hora_inicio}</Text>
                                         <Text style={style.textInformacion}>- Telefono: {resp.Alertum.Administrado.telefono}</Text>
-                                        <Text style={style.textInformacion}>- Anexo: {resp.anexo}</Text>
+                                        <Text style={style.textInformacion}>- Anexo: {resp.Alertum.Administrado.anexo}</Text>
                                         <View
                                             style={{ marginTop: 10 }}
                                         >

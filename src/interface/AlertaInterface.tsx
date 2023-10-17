@@ -28,6 +28,7 @@ export interface Administrado {
     tipo_area: number;
     area:      number;
     telefono:  string;
+    anexo:     string;
 }
 
 export interface TipoAlertum {
