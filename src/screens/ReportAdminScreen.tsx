@@ -56,7 +56,7 @@ const ReportAdminScreen = () => {
       if (tipo==='') {
         Alert.alert('Seleccionar una opcion','No se selecciono ningun tipo de alerta')
       }else{
-        const url = `http://192.168.1.46:4000/api/reporte/alerta/${tipo}`;
+        const url = `http://192.168.235.127:4000/api/reporte/alerta/${tipo}`;
         await Linking.openURL(url);
       }
       
@@ -70,7 +70,7 @@ const ReportAdminScreen = () => {
       if (tipo==='') {
         Alert.alert('Seleccionar una opcion','No se selecciono ningun tipo de alerta')
       }else{
-        const url = `http://192.168.1.46:4000/api/reporte/alertaderivada/${informatico}`;
+        const url = `http://192.168.235.127:4000/api/reporte/alertaderivada/${informatico}`;
         await Linking.openURL(url);
       }
       
