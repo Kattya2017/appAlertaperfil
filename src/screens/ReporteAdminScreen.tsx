@@ -54,34 +54,36 @@ const ReporteAdminScreen = ({ navigation, route }: Props) => {
                                 <View style={style.containerCuadro}>
                                     <View style={style.imgAlertas}>
                                         <Image source={require('../assets/img/alerta/sistemas-informaticos.png')}
-                                            style={{ width: '70%', height: 90 }}
+                                            style={{ width: '70%', height: 80 }}
                                         />
                                     </View>
                                     <View style={{ width: '70%', marginBottom: 10 }}>
                                         <Text style={style.textCuadro}>{resp.Alertum.TipoAlertum.descripcion}</Text>
-                                        <Text style={style.textCuadro2}>Asignado: {resp.Usuario.nombre} {resp.Usuario.apellido}</Text>
-                                        <Text style={style.textInformacion}>Administrado: {resp.Alertum.Administrado.nombre} {resp.Alertum.Administrado.apellido}</Text>
-                                        <Text style={style.textInformacion}>-{resp.sede}</Text>
-                                        <Text style={style.textInformacion}>-ORGANO: {resp.organo}</Text>
+                                        <Text style={style.textCuadro2}>Asignado        : {resp.Usuario.nombre} {resp.Usuario.apellido}</Text>
+                                        <Text style={style.textAdministrado1}>Administrado : {resp.Alertum.Administrado.nombre} {resp.Alertum.Administrado.apellido}</Text>
+                                        <Text style={style.textInformacion}>- {resp.sede}</Text>
+                                        <Text style={style.textInformacion}>- {resp.organo}</Text>
                                         {
-                                            (resp.unidad) ? <Text style={style.textInformacion}>-UNIDAD: {resp.unidad}</Text> : ''
+                                            (resp.unidad) ? <Text style={style.textInformacion}>- {resp.unidad}</Text> : ''
                                         }
                                         {
-                                            (resp.area) ? <Text style={style.textInformacion}>-UNIDAD: {resp.area}</Text> : ''
+                                            (resp.area) ? <Text style={style.textInformacion}>- {resp.area}</Text> : ''
                                         }
-                                        <Text style={style.textInformacion}>- Fecha: {resp.fecha_inicio}</Text>
-                                        <Text style={style.textInformacion}>- Hora: {resp.hora_inicio}</Text>
+                                        <Text style={style.textInformacion}>- Fecha     : {resp.fecha_inicio}</Text>
+                                        <Text style={style.textInformacion}>- Hora      : {resp.hora_inicio}</Text>
                                         {
                                             (resp.id_estado === 1) ?
                                                 <>
                                                     <Text
                                                         style={{
-                                                            backgroundColor: 'red',
+                                                            backgroundColor: '#B70000',
                                                             width: '90%',
                                                             textAlign: 'center',
                                                             borderRadius: 10,
                                                             padding: 5,
-                                                            color: 'white'
+                                                            color: 'white',
+                                                            fontWeight:'700',
+                                                            bottom:-4,
                                                         }}
                                                     >Pendiente</Text>
                                                 </> :
@@ -93,7 +95,9 @@ const ReporteAdminScreen = ({ navigation, route }: Props) => {
                                                             textAlign: 'center',
                                                             borderRadius: 10,
                                                             padding: 5,
-                                                            color: 'white'
+                                                            color: 'white',
+                                                            fontWeight:'700',
+                                                            bottom:-4,
                                                         }}
                                                     >Atendido</Text>
                                                 </>
@@ -167,14 +171,22 @@ const style = StyleSheet.create({
         width: '95%',
         marginTop: 10,
         fontWeight: '900',
-        fontSize: 16
+        fontSize: 16,
+        textAlign:'center'
     },
     textCuadro2:{
-        color: '#840102',
+        color: '#000847',
         width: '95%',
-        //marginTop: 10,
-        fontWeight: '600',
-        fontSize: 16
+        marginTop: 6,
+        fontWeight: '700',
+        fontSize: 14
+    },
+    textAdministrado1:{
+        color: '#006271',
+        width: '95%',
+        //marginTop: 6,
+        fontWeight: '700',
+        fontSize: 14
     },
     textAdministrado: {
         color: '#004F79',
@@ -187,7 +199,7 @@ const style = StyleSheet.create({
     textInformacion: {
         color: '#343F4B',
         width: '95%',
-        fontSize: 12
+        fontSize: 12,
     },
 
     boton: {

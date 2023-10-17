@@ -38,7 +38,7 @@ const DrawerSupervisor = () => {
     >
 
 
-      <Drawer.Screen name="Home" component={StackSupervisor}
+      <Drawer.Screen name="Lista de informáticos" component={StackSupervisor}
         options={{
           drawerIcon: ({ color }) => (
             <Ionicons name='people-sharp' size={22} color={color} />
@@ -47,7 +47,7 @@ const DrawerSupervisor = () => {
       <Drawer.Screen name="Reportes" component={ReportSupervisorScreen}
         options={{
           drawerIcon: ({ color }) => (
-            <Ionicons name='document-attach-outline' size={22} color={color} />
+            <Ionicons name='document-attach' size={22} color={color} />
           )
         }} />
 

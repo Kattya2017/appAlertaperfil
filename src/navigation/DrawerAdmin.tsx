@@ -38,18 +38,21 @@ const DrawerAdmin=()=> {
       }
     }}
     >
-      <Drawer.Screen name="Home" component={StackAdmin}
+      <Drawer.Screen name="Bandeja de alertas" component={StackAdmin}
       options={{
         drawerIcon:({color}) => (
-          <Ionicons name='home-sharp' size={22} color={color} />)}}/>
-      <Drawer.Screen name="Alerta Derivada" component={ReporteAdminScreen}
+          <Ionicons name='mail-unread' size={22} color={color} />)}}/>
+
+      <Drawer.Screen name="Alertas derivadas" component={ReporteAdminScreen}
       options={{
         drawerIcon:({color}) => (
-          <Ionicons name='home-sharp' size={22} color={color} />)}}/>
+          <Ionicons name='paper-plane' size={22} color={color} />)}}/>
+
        <Drawer.Screen name="Reportes" component={ReportAdminScreen}
       options={{
         drawerIcon:({color}) => (
-          <Ionicons name='document-attach-outline' size={22} color={color} />)}}/>
+          <Ionicons name='document-attach' size={22} color={color} />)}}/>
+          
     </Drawer.Navigator>
   );
 }

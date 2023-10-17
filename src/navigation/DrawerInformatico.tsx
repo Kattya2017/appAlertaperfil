@@ -37,10 +37,10 @@ const DrawerInformatico=()=> {
     }}
     >
 
-    <Drawer.Screen name="Bandeja" component={StackInformatico}
+    <Drawer.Screen name="Bandeja de alertas" component={StackInformatico}
       options={{
         drawerIcon:({color})=>(
-        <Ionicons name='mail-sharp' size={22} color={color}/>
+        <Ionicons name='mail-unread' size={22} color={color}/>
         )}}/>
     </Drawer.Navigator>
   );

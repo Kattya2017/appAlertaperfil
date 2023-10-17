@@ -79,7 +79,7 @@ const AlertasDerivadasScreen = ({ navigation, route }: Props) => {
   const derivarAlerta =async()=>{
     try {      
       if (!informatico) {
-        Alert.alert('Informatico no seleccionado','Seleccionar el personal que atendera la alerta')
+        Alert.alert('Informático no seleccionado','Seleccionar el personal que atendera la alerta')
       }else{
         const data = {
           id_alerta:route.params.id_alerta,
@@ -110,19 +110,19 @@ const AlertasDerivadasScreen = ({ navigation, route }: Props) => {
         <Text style={style.textPrincipal}>{route.params.alerta}</Text>
         <View style={{ width: '95%', marginTop: 20 }}>
 
-          <Text style={style.textDescripcion}>Administrado: {route.params.administrado}</Text>
-          <Text style={style.textDescripcion}>SEDE: {sede}</Text>
-          <Text style={style.textDescripcion}>ORGANO: {organo}</Text>
+          <Text style={style.textDescripcion1}>{route.params.administrado}</Text>
+          <Text style={style.textDescripcion}>{sede}</Text>
+          <Text style={style.textDescripcion}>{organo}</Text>
           {
-            (unidad !== '') ? <Text style={style.textDescripcion}>UNIDAD: {unidad}</Text> : ''
+            (unidad !== '') ? <Text style={style.textDescripcion}>{unidad}</Text> : ''
           }
           {
-            (area !== '') ? <Text style={style.textDescripcion}>AREA: {area}</Text> : ''
+            (area !== '') ? <Text style={style.textDescripcion}>{area}</Text> : ''
           }
-          <Text style={style.textDescripcion}>Fecha    :{route.params.fecha}</Text>
-          <Text style={style.textDescripcion}>Hora     :{route.params.hora}</Text>
-          <Text style={style.textDescripcion}>Telefono     :{route.params.telefono}</Text>
-          <Text style={style.textDescripcion}>Anexo     :{route.params.anexo}</Text>
+          <Text style={style.textDescripcion}>Fecha       : {route.params.fecha}</Text>
+          <Text style={style.textDescripcion}>Hora         : {route.params.hora}</Text>
+          <Text style={style.textDescripcion}>Telefono  : {route.params.telefono}</Text>
+          <Text style={style.textDescripcion}>Anexo       : {route.params.anexo}</Text>
         </View>
 
         <View style={{ justifyContent: 'center', alignItems: 'center',width:'100%', marginTop:10}}>
@@ -143,7 +143,7 @@ const AlertasDerivadasScreen = ({ navigation, route }: Props) => {
               }}
               selectedValue={informatico}
               onValueChange={(value: string) => setInformatico(value)}
-              primaryColor={'green'}
+              primaryColor={'#840102'}
               dropdownStyle={{
                 backgroundColor: 'white',
               }}
@@ -192,12 +192,20 @@ const style = StyleSheet.create({
   textPrincipal: {
     fontFamily: 'Roboto-Bold',
     fontSize: 15,
-    bottom: 10,
+    bottom: 5,
     color: '#840102',
     marginTop: 30,
     textAlign: 'center'
   },
 
+  textDescripcion1: {
+    fontFamily: 'Roboto-Bold',
+    color: '#001170',
+    fontSize: 13,
+    justifyContent: 'center',
+    alignItems: 'center',
+    left: 15
+  },
   textDescripcion: {
     fontFamily: 'Roboto-Bold',
     color: 'black',

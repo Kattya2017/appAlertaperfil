@@ -65,18 +65,18 @@ const BandejaAlertasScreen = ({navigation}:Props) => {
                                         <Text style={style.textCuadro}>{resp.Alertum.TipoAlertum.descripcion}</Text>
                                         <Text style={style.textAdministrado}>{resp.Alertum.Administrado.nombre} {resp.Alertum.Administrado.apellido}</Text>
 
-                                        <Text style={style.textInformacion}>-{resp.sede}</Text>
-                                        <Text style={style.textInformacion}>-ORGANO: {resp.organo}</Text>
+                                        <Text style={style.textInformacion}>- {resp.sede}</Text>
+                                        <Text style={style.textInformacion}>- {resp.organo}</Text>
                                         {
-                                            (resp.unidad) ? <Text style={style.textInformacion}>-UNIDAD: {resp.unidad}</Text> : ''
+                                            (resp.unidad) ? <Text style={style.textInformacion}>- {resp.unidad}</Text> : ''
                                         }
                                         {
-                                            (resp.area) ? <Text style={style.textInformacion}>-UNIDAD: {resp.area}</Text> : ''
+                                            (resp.area) ? <Text style={style.textInformacion}>- {resp.area}</Text> : ''
                                         }
-                                        <Text style={style.textInformacion}>- Fecha: {resp.fecha_inicio}</Text>
-                                        <Text style={style.textInformacion}>- Hora: {resp.hora_inicio}</Text>
-                                        <Text style={style.textInformacion}>- Telefono: {resp.Alertum.Administrado.telefono}</Text>
-                                        <Text style={style.textInformacion}>- Anexo: {resp.Alertum.Administrado.anexo}</Text>
+                                        <Text style={style.textInformacion}>- Fecha       : {resp.fecha_inicio}</Text>
+                                        <Text style={style.textInformacion}>- Hora         : {resp.hora_inicio}</Text>
+                                        <Text style={style.textInformacion}>- Telefono  : {resp.Alertum.Administrado.telefono}</Text>
+                                        <Text style={style.textInformacion}>- Anexo       : {resp.Alertum.Administrado.anexo}</Text>
                                         <View
                                             style={{ marginTop: 10 }}
                                         >
@@ -85,7 +85,8 @@ const BandejaAlertasScreen = ({navigation}:Props) => {
                                                 onPress={()=>navigation.navigate('Alertas',{id_alerta:resp.id})}
                                             >
                                                 <Text style={{
-                                                    color: 'white'
+                                                    color: 'white',
+                                                    fontWeight:'700'
                                                 }}>Atender</Text>
                                             </TouchableOpacity>
                                         </View>
@@ -145,7 +146,8 @@ const style = StyleSheet.create({
         width: '100%',
         marginTop: 10,
         fontWeight: '900',
-        fontSize: 16
+        fontSize: 16,
+        textAlign:'center'
     },
 
     textAdministrado: {
@@ -163,8 +165,8 @@ const style = StyleSheet.create({
     },
 
     boton: {
-        backgroundColor: '#009F0B',
-        padding: 10,
+        backgroundColor: 'green',
+        padding: 5,
         width: '80%',
         borderRadius: 10,
         justifyContent: 'center',

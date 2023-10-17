@@ -87,8 +87,8 @@ const ReportSupervisorScreen = () => {
         style={styles.containerAlerta}
       >
         <Dropdown
-          label="Reporte Alertas Por Tipos"
-          placeholder="Seleccionar una opcion"
+          label="Reporte por tipos de alertas"
+          placeholder="Seleccionar una opción"
           options={
             listTipo.map((resp, index) => {
               return { label: resp.descripcion, value: `${resp.id}` }
@@ -96,7 +96,7 @@ const ReportSupervisorScreen = () => {
           }
           selectedValue={tipo}
           onValueChange={(value: string) => setTipo(value)}
-          primaryColor={'green'}
+          primaryColor={'#840102'}
           checkboxLabelStyle={{
             color: 'black'
           }}
@@ -105,6 +105,7 @@ const ReportSupervisorScreen = () => {
           }}
         />
         <Button
+          color={'#840102'}
           title='Generar Reporte'
           onPress={descargarPDFTipo}
         />
@@ -113,8 +114,8 @@ const ReportSupervisorScreen = () => {
         style={styles.containerAlerta}
       >
         <Dropdown
-          label="Reporte de Alertas Derivadas Por Informatico"
-          placeholder="Seleccionar una opcion"
+          label="Reporte de alertas derivadas por informático"
+          placeholder="Seleccionar una opción"
           options={
             listUsuario.map((resp, index) => {
               return { label: `${resp.nombre} ${resp.apellido}`, value: `${resp.id}` }
@@ -122,7 +123,7 @@ const ReportSupervisorScreen = () => {
           }
           selectedValue={informatico}
           onValueChange={(value: string) => setInformatico(value)}
-          primaryColor={'green'}
+          primaryColor={'#840102'}
           checkboxLabelStyle={{
             color: 'black'
           }}
@@ -131,6 +132,7 @@ const ReportSupervisorScreen = () => {
           }}
         />
         <Button
+          color={'#840102'}
           title='Generar Reporte'
           onPress={descargarPDFInformatico}
         />

@@ -87,7 +87,7 @@ const ReportAdminScreen = () => {
         style={styles.containerAlerta}
       >
         <Dropdown
-          label="Reporte Alertas Por Tipos"
+          label="Reporte por tipos de alertas"
           placeholder="Seleccionar una opcion"
           options={
             listTipo.map((resp, index) => {
@@ -96,7 +96,7 @@ const ReportAdminScreen = () => {
           }
           selectedValue={tipo}
           onValueChange={(value: string) => setTipo(value)}
-          primaryColor={'green'}
+          primaryColor={'#840102'}
           checkboxLabelStyle={{
             color: 'black'
           }}
@@ -105,6 +105,7 @@ const ReportAdminScreen = () => {
           }}
         />
         <Button
+          color={'#840102'}
           title='Generar Reporte'
           onPress={descargarPDFTipo}
         />
@@ -113,7 +114,7 @@ const ReportAdminScreen = () => {
         style={styles.containerAlerta}
       >
         <Dropdown
-          label="Reporte de Alertas Derivadas Por Informatico"
+          label="Reporte de alertas derivadas por informático"
           placeholder="Seleccionar una opcion"
           options={
             listUsuario.map((resp, index) => {
@@ -133,6 +134,7 @@ const ReportAdminScreen = () => {
         <Button
           title='Generar Reporte'
           onPress={descargarPDFInformatico}
+          color={'#840102'}
         />
       </View>
     </View>
