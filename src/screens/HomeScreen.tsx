@@ -7,6 +7,7 @@ import { Alertas, ResultAlertas } from '../interface/AlertaInterface';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamsAdmin } from '../navigation/StackAdmin';
 import socket from '../socket/socketApi';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const { width, height } = Dimensions.get('window');
@@ -14,7 +15,10 @@ interface Props extends StackScreenProps<RootStackParamsAdmin, 'Inicio'> { };
 
 const HomeScreen = ({ navigation }: Props) => {
     const [listAlertas, setListAlertas] = useState<Alertas[]>([]);
-
+    const [dia, setDia] = useState('');
+    const [mes, setMes] = useState('');
+    const [ano, setAno] = useState('');
+    const [diaNumber, setDiaNumber] = useState('')
 
     useEffect(() => {
         cargarFecha();
@@ -25,14 +29,15 @@ const HomeScreen = ({ navigation }: Props) => {
     useEffect(() => {
       eschucharSocket();
     }, [])
+    useEffect(() => {
+        eschucharInformaticoSocket();
+    }, [])
     
 
     const mostrarAlertas = async () => {
         try {
             const resp = await alertaPerfilApi.get<ResultAlertas>('/alerta/ultimas/24');
             setListAlertas(resp.data.resp);
-            console.log(resp.data.resp);
-
         } catch (error) {
             console.log(error);
 
@@ -41,11 +46,80 @@ const HomeScreen = ({ navigation }: Props) => {
 
     const cargarFecha = () => {
         const date = new Date();
-        console.log(date.toDateString());
-        const fecha = date.toLocaleDateString("es-PE", { timeZone: "America/Lima" });
+        const day = date.getDay();
+        const dey = date.getDate();
+        const month= date.getMonth();
+        const ano = date.getFullYear();
+
+        console.log(month);
+        setAno(`${ano}`);
+        setDiaNumber(`${dey}`);
+    
+        switch (day) {
+            case 1:
+                    setDia('Lunes');
+                break;
+            case 2:
+                    setDia('Martes');
+                break;
+            case 3:
+                    setDia('Miercoles');
+                break;
+            case 4:
+                    setDia('Jueves');
+                break;
+            case 5:
+                    setDia('Viernes');
+                break;
+            case 6:
+                    setDia('Sabado');
+                break;
+            default:
+                    setDia('Domingo')
+                break;
+        }
+        switch (month) {
+            case 1:
+                    setMes('Febrero');
+                break;
+            case 2:
+                    setMes('Marzo');
+                break;
+            case 3:
+                    setMes('Abril');
+                break;
+            case 4:
+                    setMes('Mayo');
+                break;
+            case 5:
+                    setMes('Junio');
+                break;
+            case 6:
+                    setMes('Julio');
+                break;
+            case 7:
+                    setMes('Agosto');
+                break;
+            case 8:
+                    setMes('Setiembre');
+                break;
+            case 9:
+                    setMes('Octubre');
+                break;
+            case 10:
+                    setMes('Noviembre');
+                break;
+            case 11:
+                    setMes('Diciembre');
+                break;
+            default:
+                    setMes('Enero')
+                break;
+        }
+        /* const fecha = date.toLocaleDateString("es-PE", { timeZone: "America/Lima" });
         console.log(fecha);
         const newFecha = new Date();
-        console.log(newFecha.toDateString());
+        console.log(newFecha.toDateString()); */
     };
 
     const eschucharSocket = async () => {
@@ -53,10 +127,19 @@ const HomeScreen = ({ navigation }: Props) => {
             mostrarAlertas()
         })
     }
+    const eschucharInformaticoSocket = async () => {        
+        socket.on(`informatico-alerta-derivada`, async(token) => {
+            const tok= await AsyncStorage.getItem('token');
+            if (tok===token) {
+                mostrarAlertas();
+            }
+            
+        })
+    }
     return (
         <View style={styles.general}>
             <FondoComponent />
-            <Text style={{ marginTop: 20, left: 10, fontWeight: '900', color: '#464646' }} >Viernes, 15 setiembre de 2023</Text>
+            <Text style={{ marginTop: 20, left: 10, fontWeight: '900', color: '#464646' }} >{dia}, {diaNumber} de {mes} de {ano}</Text>
             <View style={styles.containerContent}>
                 <ScrollView>
                     {
@@ -96,14 +179,14 @@ const HomeScreen = ({ navigation }: Props) => {
                                     }}
                                 >
                                     <View style={styles.imageContainer}>
-                                    <Image source={{uri:`http://192.168.1.35:4000/api/uploads/tipoalerta/${resp.TipoAlertum.id}/asasa`}}
+                                    <Image source={{uri:`http://192.168.1.46:4000/api/uploads/tipoalerta/${resp.TipoAlertum.id}/${(resp.TipoAlertum.imagen)?resp.TipoAlertum.imagen:'asasas'}`}}
                                             style={{ width: '93%', height: 60 }}
                                         />
                                       {/*  <Image style={styles.logoImagen} source={require('../assets/img/alerta/redes-problema.png')} />*/}
                                     </View>
                                     <View style={styles.palabras}>
                                         <Text style={styles.texto}>{resp.TipoAlertum.descripcion}</Text>
-                                        <Text style={styles.subTexto}>Sede de Administración</Text>
+                                        <Text style={styles.subTexto}>Administrado: {resp.Administrado.nombre} {resp.Administrado.apellido}</Text>
                                         <Text style={styles.subTexto}>Hora: {resp.hora}</Text>
                                         {
                                             (resp.estado === 0) ? <Text style={{ ...styles.subTexto, color: 'red' }}>Sin atencion</Text> : <Text style={{ ...styles.subTexto, color: 'green' }}>Derivado</Text>

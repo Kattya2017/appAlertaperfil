@@ -26,7 +26,8 @@ const StackAdmin=()=> {
   return (
     <Stack.Navigator
         screenOptions={{
-            headerShown:false
+            headerShown:false,
+            freezeOnBlur:true
         }}
     >
       <Stack.Screen name="Inicio" component={HomeScreen} />

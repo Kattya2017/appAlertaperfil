@@ -10,6 +10,7 @@ import { ResultUnidadOrganica } from '../interface/UnidadInterface';
 import { ResultArea, Sede } from '../interface/AreaInterface';
 import { Informatico, ResultInformatico } from '../interface/UsuarioInterface';
 import socket from '../socket/socketApi';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const { width, height } = Dimensions.get('window');
 interface Props extends StackScreenProps<RootStackParamsAdmin, 'Alertas'> { };
@@ -88,16 +89,15 @@ const AlertasDerivadasScreen = ({ navigation, route }: Props) => {
           organo,
           unidad,
           area
-        }
-        console.log(data);
-        
+        }        
         const resp = await alertaPerfilApi.post('/alertaderivada',data);
         socket.emit('nueva-alerta-derivada');
-        
+        const token =await AsyncStorage.getItem('token');
+
+        socket.emit('informatico-alerta-derivada',token);
+        setInformatico('');
         navigation.push('Inicio');
       }
-      
-      
     } catch (error) {
       console.log(error);
       

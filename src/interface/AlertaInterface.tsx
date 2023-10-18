@@ -35,4 +35,5 @@ export interface TipoAlertum {
     id:          number;
     descripcion: string;
     estado:      number;
+    imagen:      number;
 }

@@ -6,6 +6,7 @@ import FondoComponent from '../components/FondoComponent';
 import { useForm } from '../hooks/useForm';
 import alertaPerfilApi from '../api/alertaperfilApi';
 import socket from '../socket/socketApi';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 interface Props extends StackScreenProps<RootStackParamsInformatico, 'Alertas'> { };
 
 const ResponderAlerta = ({navigation,route}:Props) => {
@@ -26,6 +27,8 @@ const ResponderAlerta = ({navigation,route}:Props) => {
         const resp = await alertaPerfilApi.put(`/alertaderivada/${route.params.id_alerta}`,data);
         socket.emit('nueva-alerta-derivada');
         form.descripcion='';
+        const token =await AsyncStorage.getItem('token');
+        socket.emit('respuesta-alerta-derivada',token);
         navigation.push('Inicio');
 
         

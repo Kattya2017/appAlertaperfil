@@ -6,6 +6,7 @@ import { Derivada, ResultAlertasDerivadas } from '../interface/AlertaDerivadaInt
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamsInformatico } from '../navigation/StackInformatico';
 import socket from '../socket/socketApi';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
@@ -22,7 +23,10 @@ const BandejaAlertasScreen = ({navigation}:Props) => {
     useEffect(() => {
       eschucharSocket();
     }, [])
-
+    useEffect(() => {
+      eschucharInformaticoSocket();
+    }, [])
+    
 
 
     const mostrarAlerta = async () => {
@@ -37,6 +41,15 @@ const BandejaAlertasScreen = ({navigation}:Props) => {
     const eschucharSocket = async () => {
         socket.on(`nueva-alerta-derivada`, () => {
             mostrarAlerta()
+        })
+    }
+    const eschucharInformaticoSocket = async () => {        
+        socket.on(`respuesta-alerta-derivada`, async(token) => {
+            const tok= await AsyncStorage.getItem('token');
+            if (tok===token) {
+                mostrarAlerta();
+            }
+            
         })
     }
     return (
@@ -57,7 +70,7 @@ const BandejaAlertasScreen = ({navigation}:Props) => {
                             >
                                 <View style={style.containerCuadro}>
                                     <View style={style.imgAlertas}>
-                                        <Image source={{uri:`http://192.168.1.35:4000/api/uploads/tipoalerta/${resp.Alertum.TipoAlertum.id}/asasa`}}
+                                        <Image source={{uri:`http://192.168.1.46:4000/api/uploads/tipoalerta/${resp.Alertum.TipoAlertum.id}/${(resp.Alertum.TipoAlertum.imagen)?resp.Alertum.TipoAlertum.imagen:'asasas'}`}}
                                             style={{ width: '80%', height: 81 }}
                                         />
                                     </View>
