@@ -53,8 +53,8 @@ const ReporteAdminScreen = ({ navigation, route }: Props) => {
                             >
                                 <View style={style.containerCuadro}>
                                     <View style={style.imgAlertas}>
-                                        <Image source={require('../assets/img/alerta/sistemas-informaticos.png')}
-                                            style={{ width: '70%', height: 80 }}
+                                    <Image source={{uri:`http://192.168.1.35:4000/api/uploads/tipoalerta/${resp.Alertum.TipoAlertum.id}/asasa`}}
+                                            style={{ width: '80%', height: 80 }}
                                         />
                                     </View>
                                     <View style={{ width: '70%', marginBottom: 10 }}>

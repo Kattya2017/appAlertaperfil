@@ -96,7 +96,7 @@ const HomeScreen = ({ navigation }: Props) => {
                                     }}
                                 >
                                     <View style={styles.imageContainer}>
-                                    <Image source={{uri:`http://192.168.235.127:4000/api/uploads/tipoalerta/${resp.TipoAlertum.id}/asasa`}}
+                                    <Image source={{uri:`http://192.168.1.35:4000/api/uploads/tipoalerta/${resp.TipoAlertum.id}/asasa`}}
                                             style={{ width: '93%', height: 60 }}
                                         />
                                       {/*  <Image style={styles.logoImagen} source={require('../assets/img/alerta/redes-problema.png')} />*/}
