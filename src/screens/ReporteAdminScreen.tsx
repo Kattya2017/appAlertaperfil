@@ -53,7 +53,7 @@ const ReporteAdminScreen = ({ navigation, route }: Props) => {
                             >
                                 <View style={style.containerCuadro}>
                                     <View style={style.imgAlertas}>
-                                    <Image source={{uri:`http://192.168.1.46:4000/api/uploads/tipoalerta/${resp.Alertum.TipoAlertum.id}/${(resp.Alertum.TipoAlertum.imagen)?resp.Alertum.TipoAlertum.imagen:'asasas'}`}}
+                                    <Image source={{uri:`http://192.168.235.127:4000/api/uploads/tipoalerta/${resp.Alertum.TipoAlertum.id}/${(resp.Alertum.TipoAlertum.imagen)?resp.Alertum.TipoAlertum.imagen:'asasas'}`}}
                                             style={{ width: '80%', height: 80 }}
                                         />
                                     </View>

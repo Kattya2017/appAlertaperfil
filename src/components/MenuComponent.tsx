@@ -21,7 +21,7 @@ const MenuComponent = (props: DrawerContentComponentProps) => {
         img:rol==='USER_ADMIN'? require('../assets/img/mi-perfil.png'):(rol==='USER_SUPERVISOR')? require('../assets/img/perfil.png'):require('../assets/img/hombre.png'),
         fondo:require('../assets/img/fondo-rojo.png'),
         subTitle:rol==='USER_ADMIN'?'ADMINISTRADOR':(rol==='USER_SUPERVISOR')?'SUPERVISOR':'INFORMÁTICO',
-        titulo: 'INFORMATICO SOS'
+        titulo: 'INFORMATICA SOS'
     }
 
 

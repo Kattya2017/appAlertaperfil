@@ -60,7 +60,7 @@ const ReporteAlertaScreen = ({ navigation, route }: Props) => {
                             >
                                 <View style={style.containerCuadro}>
                                     <View style={style.imgAlertas}>
-                                        <Image source={{uri:`http://192.168.1.35:4000/api/uploads/tipoalerta/${resp.Alertum.TipoAlertum.id}/asasa`}}
+                                        <Image source={{uri:`http://192.168.235.127:4000/api/uploads/tipoalerta/${resp.Alertum.TipoAlertum.id}/asasa`}}
                                             style={{ width: '80%', height: 80 }}
                                         />
                                     </View>
