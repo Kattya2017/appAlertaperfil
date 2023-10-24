@@ -8,8 +8,9 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamsAdmin } from '../navigation/StackAdmin';
 import socket from '../socket/socketApi';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-
+import Sound from 'react-native-sound';
+import DatePicker from 'react-native-date-picker';
+import Icon from 'react-native-vector-icons/Ionicons';
 const { width, height } = Dimensions.get('window');
 interface Props extends StackScreenProps<RootStackParamsAdmin, 'Inicio'> { };
 
@@ -19,101 +20,112 @@ const HomeScreen = ({ navigation }: Props) => {
     const [mes, setMes] = useState('');
     const [ano, setAno] = useState('');
     const [diaNumber, setDiaNumber] = useState('')
-
+    const [date, setDate] = useState(new Date())
+    const [open, setOpen] = useState(false);
+    const [output, setOutput] = useState('');
     useEffect(() => {
         cargarFecha();
     }, [])
     useEffect(() => {
-        mostrarAlertas();
+        const date = new Date();
+        const fen = date.getFullYear() + "-" +String(date.getMonth() + 1).padStart(2, "0") + "-" + String(date.getDate()).padStart(2, "0");
+        setOutput(fen)
+        mostrarAlertas(fen);
     }, []);
     useEffect(() => {
-      eschucharSocket();
+        eschucharSocket();
     }, [])
     useEffect(() => {
         eschucharInformaticoSocket();
-    }, [])
-    
+    }, []);
 
-    const mostrarAlertas = async () => {
+    const mostrarAlertaFecha=(fecha:Date)=>{
+        const fen = fecha.getFullYear() + "-" +String(fecha.getMonth() + 1).padStart(2, "0") + "-" + String(fecha.getDate()).padStart(2, "0");
+        setOutput(fen)
+        setDate(fecha);
+        mostrarAlertas(fen)
+        
+    }
+
+    const mostrarAlertas = async (fecha:string) => {
         try {
-            const resp = await alertaPerfilApi.get<ResultAlertas>('/alerta/ultimas/24');
+            const resp = await alertaPerfilApi.get<ResultAlertas>('/alerta/ultimas/24',{params:{fecha}});
             setListAlertas(resp.data.resp);
         } catch (error) {
             console.log(error);
 
         }
     }
-
     const cargarFecha = () => {
         const date = new Date();
         const day = date.getDay();
         const dey = date.getDate();
-        const month= date.getMonth();
+        const month = date.getMonth();
         const ano = date.getFullYear();
 
         console.log(month);
         setAno(`${ano}`);
         setDiaNumber(`${dey}`);
-    
+
         switch (day) {
             case 1:
-                    setDia('Lunes');
+                setDia('Lunes');
                 break;
             case 2:
-                    setDia('Martes');
+                setDia('Martes');
                 break;
             case 3:
-                    setDia('Miercoles');
+                setDia('Miercoles');
                 break;
             case 4:
-                    setDia('Jueves');
+                setDia('Jueves');
                 break;
             case 5:
-                    setDia('Viernes');
+                setDia('Viernes');
                 break;
             case 6:
-                    setDia('Sabado');
+                setDia('Sabado');
                 break;
             default:
-                    setDia('Domingo')
+                setDia('Domingo')
                 break;
         }
         switch (month) {
             case 1:
-                    setMes('Febrero');
+                setMes('Febrero');
                 break;
             case 2:
-                    setMes('Marzo');
+                setMes('Marzo');
                 break;
             case 3:
-                    setMes('Abril');
+                setMes('Abril');
                 break;
             case 4:
-                    setMes('Mayo');
+                setMes('Mayo');
                 break;
             case 5:
-                    setMes('Junio');
+                setMes('Junio');
                 break;
             case 6:
-                    setMes('Julio');
+                setMes('Julio');
                 break;
             case 7:
-                    setMes('Agosto');
+                setMes('Agosto');
                 break;
             case 8:
-                    setMes('Setiembre');
+                setMes('Setiembre');
                 break;
             case 9:
-                    setMes('Octubre');
+                setMes('Octubre');
                 break;
             case 10:
-                    setMes('Noviembre');
+                setMes('Noviembre');
                 break;
             case 11:
-                    setMes('Diciembre');
+                setMes('Diciembre');
                 break;
             default:
-                    setMes('Enero')
+                setMes('Enero')
                 break;
         }
         /* const fecha = date.toLocaleDateString("es-PE", { timeZone: "America/Lima" });
@@ -121,25 +133,80 @@ const HomeScreen = ({ navigation }: Props) => {
         const newFecha = new Date();
         console.log(newFecha.toDateString()); */
     };
-
     const eschucharSocket = async () => {
         socket.on(`nueva-alerta`, () => {
-            mostrarAlertas()
+            const soundMusic = require('../assets/img/music/notificacionalerta.mp3');
+            const soundVar = new Sound(soundMusic, Sound.MAIN_BUNDLE, (err) => {
+                if (err) {
+                    console.log('No se puede escuchar la musica');
+                }
+            });
+            setTimeout(() => {
+                soundVar.play();
+            }, 100);
+            soundVar.release();
+            mostrarAlertas(output)
         })
     }
-    const eschucharInformaticoSocket = async () => {        
-        socket.on(`informatico-alerta-derivada`, async(token) => {
-            const tok= await AsyncStorage.getItem('token');
-            if (tok===token) {
-                mostrarAlertas();
+    const eschucharInformaticoSocket = async () => {
+        socket.on(`informatico-alerta-derivada`, async (token) => {
+            const tok = await AsyncStorage.getItem('token');
+            if (tok === token) {
+                mostrarAlertas(output);
             }
-            
+
         })
     }
     return (
         <View style={styles.general}>
             <FondoComponent />
-            <Text style={{ marginTop: 20, left: 10, fontWeight: '900', color: '#464646' }} >{dia}, {diaNumber} de {mes} de {ano}</Text>
+            <View
+                style={{
+                    width: '100%',
+                    height: 40,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginTop:10
+                }}
+            >
+                <TouchableOpacity
+                    style={{
+                        width: '95%',
+                        height: '100%',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backgroundColor: 'blue',
+                        borderRadius: 10,
+                        flexDirection: 'row',
+
+                    }}
+                    onPress={() => setOpen(true)}
+                >
+                    <Icon
+                        name='calendar-outline'
+                        size={20}
+                        color={'white'}
+                    />
+                    <Text
+                        style={{
+                            color: 'white',
+                            marginLeft: 5
+                        }}
+                    >Seleccionar Fecha</Text>
+                </TouchableOpacity>
+            </View>
+            <DatePicker
+                modal
+                open={open}
+                date={date}
+                onConfirm={(date) => {
+                    setOpen(false)
+                    mostrarAlertaFecha(date)
+                }}
+                onCancel={() => {
+                    setOpen(false)
+                }}
+            />
             <View style={styles.containerContent}>
                 <ScrollView>
                     {
@@ -160,10 +227,10 @@ const HomeScreen = ({ navigation }: Props) => {
                                                 tipo_area: resp.Administrado.tipo_area,
                                                 id_alerta: resp.id,
                                                 administrado: `${resp.Administrado.nombre} ${resp.Administrado.apellido}`,
-                                                telefono:resp.Administrado.telefono,
-                                                anexo:resp.Administrado.anexo
+                                                telefono: resp.Administrado.telefono,
+                                                anexo: resp.Administrado.anexo
                                             });
-                                            
+
                                             navigation.navigate('Alertas', {
                                                 alerta: resp.TipoAlertum.descripcion,
                                                 fecha: resp.fecha,
@@ -172,17 +239,17 @@ const HomeScreen = ({ navigation }: Props) => {
                                                 tipo_area: resp.Administrado.tipo_area,
                                                 id_alerta: resp.id,
                                                 administrado: `${resp.Administrado.nombre} ${resp.Administrado.apellido}`,
-                                                telefono:resp.Administrado.telefono,
-                                                anexo:resp.Administrado.anexo
+                                                telefono: resp.Administrado.telefono,
+                                                anexo: resp.Administrado.anexo
                                             })
                                         }
                                     }}
                                 >
                                     <View style={styles.imageContainer}>
-                                    <Image source={{uri:`http://192.168.235.127:4000/api/uploads/tipoalerta/${resp.TipoAlertum.id}/${(resp.TipoAlertum.imagen)?resp.TipoAlertum.imagen:'asasas'}`}}
+                                        <Image source={{ uri: `http://192.168.235.127:4000/api/uploads/tipoalerta/${resp.TipoAlertum.id}/${(resp.TipoAlertum.imagen) ? resp.TipoAlertum.imagen : 'asasas'}` }}
                                             style={{ width: '93%', height: 60 }}
                                         />
-                                      {/*  <Image style={styles.logoImagen} source={require('../assets/img/alerta/redes-problema.png')} />*/}
+                                        {/*  <Image style={styles.logoImagen} source={require('../assets/img/alerta/redes-problema.png')} />*/}
                                     </View>
                                     <View style={styles.palabras}>
                                         <Text style={styles.texto}>{resp.TipoAlertum.descripcion}</Text>
