@@ -141,18 +141,20 @@ const HomeScreen = ({ navigation }: Props) => {
                     console.log('No se puede escuchar la musica');
                 }
             });
-            setTimeout(() => {
-                soundVar.play();
-            }, 100);
+            soundVar.play();
             soundVar.release();
-            mostrarAlertas(output)
+            const fecha = new Date();
+            const fen = fecha.getFullYear() + "-" +String(fecha.getMonth() + 1).padStart(2, "0") + "-" + String(fecha.getDate()).padStart(2, "0");
+            mostrarAlertas(fen)
         })
     }
     const eschucharInformaticoSocket = async () => {
         socket.on(`informatico-alerta-derivada`, async (token) => {
             const tok = await AsyncStorage.getItem('token');
             if (tok === token) {
-                mostrarAlertas(output);
+                const fecha = new Date();
+                const fen = fecha.getFullYear() + "-" +String(fecha.getMonth() + 1).padStart(2, "0") + "-" + String(fecha.getDate()).padStart(2, "0");
+                mostrarAlertas(fen)
             }
 
         })

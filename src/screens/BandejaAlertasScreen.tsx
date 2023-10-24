@@ -7,6 +7,7 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamsInformatico } from '../navigation/StackInformatico';
 import socket from '../socket/socketApi';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Sound from 'react-native-sound';
 
 
 
@@ -40,6 +41,14 @@ const BandejaAlertasScreen = ({navigation}:Props) => {
     }
     const eschucharSocket = async () => {
         socket.on(`nueva-alerta-derivada`, () => {
+            const soundMusic = require('../assets/img/music/notificacionalerta.mp3');
+            const soundVar = new Sound(soundMusic, Sound.MAIN_BUNDLE, (err) => {
+                if (err) {
+                    console.log('No se puede escuchar la musica');
+                }
+            });
+            soundVar.play();
+            soundVar.release();
             mostrarAlerta()
         })
     }
