@@ -165,7 +165,7 @@ const HomeScreen = ({ navigation }: Props) => {
             <View
                 style={{
                     width: '100%',
-                    height: 40,
+                    height: 30,
                     justifyContent: 'center',
                     alignItems: 'center',
                     marginTop:10
@@ -281,15 +281,14 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     containerContent: {
-        width,
-        height,
+        flex:1,
         alignItems: 'center',
-        marginTop: 20,
+        marginTop: 0,
     },
     container: {
         flexDirection: 'row',
         width: '95%',
-        marginBottom: 25
+        marginTop: 20
     },
     imageContainer: {
         width: '20%',
