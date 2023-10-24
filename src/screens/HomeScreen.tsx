@@ -175,7 +175,7 @@ const HomeScreen = ({ navigation }: Props) => {
                         height: '100%',
                         justifyContent: 'center',
                         alignItems: 'center',
-                        backgroundColor: 'blue',
+                        backgroundColor: '#840102',
                         borderRadius: 10,
                         flexDirection: 'row',
 
