@@ -134,20 +134,25 @@ const HomeScreen = ({ navigation }: Props) => {
         console.log(newFecha.toDateString()); */
     };
     const eschucharSocket = async () => {
-        socket.on(`nueva-alerta`, () => {
-            const soundMusic = require('../assets/img/music/notificacionalerta.mp3');
-            const soundVar = new Sound(soundMusic, Sound.MAIN_BUNDLE, (err) => {
-                if (err) {
-                    console.log('No se puede escuchar la musica');
-                }
-            });
-            soundVar.play((sucess)=>{
-                console.log('se eschucho');
+        try {
+            socket.on(`nueva-alerta`, () => {
+                const soundMusic = require('../assets/img/music/notificacionalerta.mp3');
+                const soundVar = new Sound(soundMusic, Sound.MAIN_BUNDLE, (err) => {
+                    if (err) {
+                        console.log('No se puede escuchar la musica');
+                    }
+                });
+                soundVar.play((sucess)=>{
+                    console.log('se eschucho');
+                })
+                const fecha = new Date();
+                const fen = fecha.getFullYear() + "-" +String(fecha.getMonth() + 1).padStart(2, "0") + "-" + String(fecha.getDate()).padStart(2, "0");
+                mostrarAlertas(fen)
             })
-            const fecha = new Date();
-            const fen = fecha.getFullYear() + "-" +String(fecha.getMonth() + 1).padStart(2, "0") + "-" + String(fecha.getDate()).padStart(2, "0");
-            mostrarAlertas(fen)
-        })
+        } catch (error) {
+            console.log(error);
+            
+        }
     }
     const eschucharInformaticoSocket = async () => {
         socket.on(`informatico-alerta-derivada`, async (token) => {
@@ -249,7 +254,7 @@ const HomeScreen = ({ navigation }: Props) => {
                                     }}
                                 >
                                     <View style={styles.imageContainer}>
-                                        <Image source={{ uri: `http://192.168.235.127:4000/api/uploads/tipoalerta/${resp.TipoAlertum.id}/${(resp.TipoAlertum.imagen) ? resp.TipoAlertum.imagen : 'asasas'}` }}
+                                        <Image source={{ uri: `http://209.45.80.77:4001/api/uploads/tipoalerta/${resp.TipoAlertum.id}/${(resp.TipoAlertum.imagen) ? resp.TipoAlertum.imagen : 'asasas'}` }}
                                             style={{ width: '93%', height: 60 }}
                                         />
                                         {/*  <Image style={styles.logoImagen} source={require('../assets/img/alerta/redes-problema.png')} />*/}
