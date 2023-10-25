@@ -141,8 +141,9 @@ const HomeScreen = ({ navigation }: Props) => {
                     console.log('No se puede escuchar la musica');
                 }
             });
-            soundVar.play();
-            soundVar.release();
+            soundVar.play((sucess)=>{
+                console.log('se eschucho');
+            })
             const fecha = new Date();
             const fen = fecha.getFullYear() + "-" +String(fecha.getMonth() + 1).padStart(2, "0") + "-" + String(fecha.getDate()).padStart(2, "0");
             mostrarAlertas(fen)
@@ -165,10 +166,10 @@ const HomeScreen = ({ navigation }: Props) => {
             <View
                 style={{
                     width: '100%',
-                    height: 30,
+                    height: '4%',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    marginTop:10
+                    marginTop:5
                 }}
             >
                 <TouchableOpacity
@@ -281,7 +282,8 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     containerContent: {
-        flex:1,
+        width,
+        height:'95%',
         alignItems: 'center',
         marginTop: 0,
     },

@@ -7,31 +7,31 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamsInformatico } from '../navigation/StackInformatico';
 import socket from '../socket/socketApi';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import SoundPlayer from 'react-native-sound-player'
 import Sound from 'react-native-sound';
-
 
 
 interface Props extends StackScreenProps<RootStackParamsInformatico, 'Inicio'> { };
 
 const { width, height } = Dimensions.get('window');
-const BandejaAlertasScreen = ({navigation}:Props) => {
+const BandejaAlertasScreen = ({ navigation }: Props) => {
 
     const [listAlertas, setListAlertas] = useState<Derivada[]>([])
-
     useEffect(() => {
         mostrarAlerta();
     }, [])
     useEffect(() => {
-      eschucharSocket();
+        eschucharSocket();
     }, [])
     useEffect(() => {
-      eschucharInformaticoSocket();
+        eschucharInformaticoSocket();
     }, [])
-    
+
 
 
     const mostrarAlerta = async () => {
         try {
+
             const resp = await alertaPerfilApi.get<ResultAlertasDerivadas>('/alertaderivada/alerta/informatico');
             setListAlertas(resp.data.resp)
         } catch (error) {
@@ -40,25 +40,34 @@ const BandejaAlertasScreen = ({navigation}:Props) => {
         }
     }
     const eschucharSocket = async () => {
-        socket.on(`nueva-alerta-derivada`, () => {
-            const soundMusic = require('../assets/img/music/notificacionalerta.mp3');
-            const soundVar = new Sound(soundMusic, Sound.MAIN_BUNDLE, (err) => {
-                if (err) {
-                    console.log('No se puede escuchar la musica');
-                }
-            });
-            soundVar.play();
-            soundVar.release();
-            mostrarAlerta()
-        })
+        try {
+            socket.on(`nueva-alerta-derivada`, () => {
+                const soundMusic = require('../assets/img/music/notificacionalerta.mp3');
+                const soundVar = new Sound(soundMusic, Sound.MAIN_BUNDLE, (err) => {
+                    if (err) {
+                        console.log('No se puede escuchar la musica');
+                    }
+                });
+                soundVar.play((sucess)=>{
+                    console.log('se eschucho');
+                    
+                })
+                
+                mostrarAlerta()
+            })
+        } catch (error) {
+            console.log(error);
+
+        }
+
     }
-    const eschucharInformaticoSocket = async () => {        
-        socket.on(`respuesta-alerta-derivada`, async(token) => {
-            const tok= await AsyncStorage.getItem('token');
-            if (tok===token) {
+    const eschucharInformaticoSocket = async () => {
+        socket.on(`respuesta-alerta-derivada`, async (token) => {
+            const tok = await AsyncStorage.getItem('token');
+            if (tok === token) {
                 mostrarAlerta();
             }
-            
+
         })
     }
     return (
@@ -79,7 +88,7 @@ const BandejaAlertasScreen = ({navigation}:Props) => {
                             >
                                 <View style={style.containerCuadro}>
                                     <View style={style.imgAlertas}>
-                                        <Image source={{uri:`http://192.168.235.127:4000/api/uploads/tipoalerta/${resp.Alertum.TipoAlertum.id}/${(resp.Alertum.TipoAlertum.imagen)?resp.Alertum.TipoAlertum.imagen:'asasas'}`}}
+                                        <Image source={{ uri: `http://192.168.235.127:4000/api/uploads/tipoalerta/${resp.Alertum.TipoAlertum.id}/${(resp.Alertum.TipoAlertum.imagen) ? resp.Alertum.TipoAlertum.imagen : 'asasas'}` }}
                                             style={{ width: '80%', height: 81 }}
                                         />
                                     </View>
@@ -104,11 +113,11 @@ const BandejaAlertasScreen = ({navigation}:Props) => {
                                         >
                                             <TouchableOpacity
                                                 style={style.boton}
-                                                onPress={()=>navigation.navigate('Alertas',{id_alerta:resp.id})}
+                                                onPress={() => navigation.navigate('Alertas', { id_alerta: resp.id })}
                                             >
                                                 <Text style={{
                                                     color: 'white',
-                                                    fontWeight:'700'
+                                                    fontWeight: '700'
                                                 }}>Atender</Text>
                                             </TouchableOpacity>
                                         </View>
@@ -169,7 +178,7 @@ const style = StyleSheet.create({
         marginTop: 10,
         fontWeight: '900',
         fontSize: 16,
-        textAlign:'center'
+        textAlign: 'center'
     },
 
     textAdministrado: {
