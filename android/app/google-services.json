@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "925572586012",
+    "project_id": "app-alertacsjuc",
+    "storage_bucket": "app-alertacsjuc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:925572586012:android:40b1f52780fdafdb769dd9",
+        "android_client_info": {
+          "package_name": "com.appalertaperfil"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuOQDD_8DUOIukIrCzKogK5PnHAt4--2Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

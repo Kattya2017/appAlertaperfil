@@ -42,18 +42,7 @@ const BandejaAlertasScreen = ({ navigation }: Props) => {
     const eschucharSocket = async () => {
         try {
             socket.on(`nueva-alerta-derivada`, () => {
-                const soundMusic = require('../assets/img/music/notificacionalerta.mp3');
-                const soundVar = new Sound(soundMusic, Sound.MAIN_BUNDLE, (err) => {
-                    if (err) {
-                        console.log('No se puede escuchar la musica');
-                    }
-                });
-                soundVar.play((sucess)=>{
-                    console.log('se eschucho');
-                    
-                })
-                
-                mostrarAlerta()
+               mostrarAlerta()
             })
         } catch (error) {
             console.log(error);
@@ -88,7 +77,7 @@ const BandejaAlertasScreen = ({ navigation }: Props) => {
                             >
                                 <View style={style.containerCuadro}>
                                     <View style={style.imgAlertas}>
-                                        <Image source={{ uri: `http://209.45.80.77:4001/api/uploads/tipoalerta/${resp.Alertum.TipoAlertum.id}/${(resp.Alertum.TipoAlertum.imagen) ? resp.Alertum.TipoAlertum.imagen : 'asasas'}` }}
+                                        <Image source={{ uri: `https://backendalertapj.gongalsoft.com/api/uploads/tipoalerta/${resp.Alertum.TipoAlertum.id}/${(resp.Alertum.TipoAlertum.imagen) ? resp.Alertum.TipoAlertum.imagen : 'asasas'}` }}
                                             style={{ width: '80%', height: 81 }}
                                         />
                                     </View>
