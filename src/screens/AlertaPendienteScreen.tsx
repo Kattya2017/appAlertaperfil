@@ -16,10 +16,11 @@ import socket from '../socket/socketApi';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Atencion, ResultAtenciones} from '../interface/AtencionInterface';
 import Dropdown from 'react-native-input-select';
+import { RootStackParamsInformaticoDos } from '../navigation/StackInformaticoDos';
 interface Props
-  extends StackScreenProps<RootStackParamsInformatico, 'Alertas'> {}
+  extends StackScreenProps<RootStackParamsInformaticoDos, 'AlertaPendiente'> {}
 
-const ResponderAlerta = ({navigation, route}: Props) => {
+const AlertaPendienteScreen = ({navigation, route}: Props) => {
   const [listAtencion, setListAtencion] = useState<Atencion[]>([]);
   const [tipoAtencion, setTipoAtencion] = useState('');
   useEffect(() => {
@@ -49,10 +50,10 @@ const ResponderAlerta = ({navigation, route}: Props) => {
         );
         socket.emit('nueva-alerta-derivada');
         form.descripcion = '';
-        setTipoAtencion('')
+        setTipoAtencion('');
         const token = await AsyncStorage.getItem('token');
         socket.emit('respuesta-alerta-derivada', token);
-        navigation.push('Inicio');
+        navigation.push('Pendiente');
       }
     } catch (error) {
       console.log(error);
@@ -143,7 +144,7 @@ const ResponderAlerta = ({navigation, route}: Props) => {
   );
 };
 
-export default ResponderAlerta;
+export default AlertaPendienteScreen;
 
 const style = StyleSheet.create({
   container: {

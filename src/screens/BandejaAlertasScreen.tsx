@@ -7,8 +7,6 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamsInformatico } from '../navigation/StackInformatico';
 import socket from '../socket/socketApi';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import SoundPlayer from 'react-native-sound-player'
-import Sound from 'react-native-sound';
 
 
 interface Props extends StackScreenProps<RootStackParamsInformatico, 'Inicio'> { };
@@ -32,7 +30,7 @@ const BandejaAlertasScreen = ({ navigation }: Props) => {
     const mostrarAlerta = async () => {
         try {
 
-            const resp = await alertaPerfilApi.get<ResultAlertasDerivadas>('/alertaderivada/alerta/informatico');
+            const resp = await alertaPerfilApi.get<ResultAlertasDerivadas>('/alertaderivada/alerta/informatico',{params:{estado:1}});
             setListAlertas(resp.data.resp)
         } catch (error) {
             console.log(error);
@@ -97,6 +95,7 @@ const BandejaAlertasScreen = ({ navigation }: Props) => {
                                         <Text style={style.textInformacion}>- Hora         : {resp.hora_inicio}</Text>
                                         <Text style={style.textInformacion}>- Telefono  : {resp.Alertum.Administrado.telefono}</Text>
                                         <Text style={style.textInformacion}>- Anexo       : {resp.Alertum.Administrado.anexo}</Text>
+                                        <Text style={style.textInformacion}>- Problema       : {resp.Alertum.descripcion}</Text>
                                         <View
                                             style={{ marginTop: 10 }}
                                         >
