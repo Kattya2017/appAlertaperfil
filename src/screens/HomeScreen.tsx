@@ -254,10 +254,12 @@ const HomeScreen = ({ navigation }: Props) => {
                                         <Text style={styles.texto}>{resp.TipoAlertum.descripcion}</Text>
                                         <Text style={styles.subTexto}>Administrado: {resp.Administrado.nombre} {resp.Administrado.apellido}</Text>
                                         <Text style={styles.subTexto}>Hora: {resp.hora}</Text>
+                                        
+                                        <Text style={styles.subTexto}>Descripcion:</Text>
+                                        <Text style={styles.subTexto}>{resp.descripcion}</Text>
                                         {
                                             (resp.estado === 0) ? <Text style={{ ...styles.subTexto, color: 'red' }}>Sin atencion</Text> : <Text style={{ ...styles.subTexto, color: 'green' }}>Derivado</Text>
                                         }
-
                                     </View>
                                 </TouchableOpacity>
                             )
